@@ -1,3 +1,8 @@
 {
-	"files.associations": {}
+	"files.associations": {
+		"*h*hutility": "cpp",
+		"initializer_list": "cpp",
+		"*h*h*h*h*h*h*h*h*h*h*h*h*h*h*h*h*h*h*h*h*h*h*h*h*h*h*h*h*harray": "cpp",
+		"*h*harray": "cpp"
+	}
 }
