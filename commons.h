@@ -10,7 +10,7 @@
 
 /*		DEFINE     */
 #define DEBUG 1
-#define NPLAYER 4
+#define NPLAYERS 4
 #define CARDSFORPLAYER 4
 
 //Grandezza stringhe
@@ -21,6 +21,7 @@
 #define FIRSTCHOICE 1
 #define LASTCHOICE 3
 
+//Directory contenente i txt delle modalita'
 #define DIRMODES "modes/"
 
 //http://www.linuxjournal.com/article/8603
@@ -32,6 +33,7 @@
 #define COLOR_MAGENTA "\x1b[35m"
 #define COLOR_CYAN    "\x1b[36m"
 #define COLOR_WHITE   "\x1b[36m"
+#define COLOR_WHITE_BLINK "\033[5;37;3m"
 #define COLOR_BROWN    "\033[01;30m"
 #define COLOR_RESET   "\x1b[0m"
 

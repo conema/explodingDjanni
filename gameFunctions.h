@@ -9,5 +9,6 @@ void shuffleDeck(Deck *deckCards);
 void printDeck(Card *deckCards, const int size);
 Deck* giveCards(Player* players, Deck *deckCards, Card * meowCards, int *nMeow);
 void printCard(Card card);
+void printType(Card card);
 
 #endif // GAME_FUNCTIONS_H_

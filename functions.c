@@ -48,7 +48,7 @@ void clearConsole(){
 }
 
 //Menù iniziale
-void menu(Player players[NPLAYER], Deck *deckCards){
+void menu(Player players[NPLAYERS], Deck *deckCards){
     int sc = 0;
     do{
         printf(
@@ -80,7 +80,7 @@ void menu(Player players[NPLAYER], Deck *deckCards){
 }
 
 //Inizio nuova partita
-void newGame(Player players[NPLAYER], Deck *deckCards){
+void newGame(Player players[NPLAYERS], Deck *deckCards){
     int sc = 0;
     int i;
     char NPC;
@@ -103,8 +103,8 @@ void newGame(Player players[NPLAYER], Deck *deckCards){
     printf("Perfetto, hai scelto la modalità N°%i, preparatevi alla battaglia!\n", sc);
     printf("Inserisci il nome dei tuoi avversari:\n");
 
-    #if (DEBUG != 1)
-    for(i = 0; i < NPLAYER; i++){
+    for(i = 0; i < NPLAYERS; i++){
+        #if (DEBUG != 1)
         printf("Giocatore %i:\n Nome: ", i+1);
         scanf("%23s", players[i].name);
         getchar();
@@ -112,16 +112,23 @@ void newGame(Player players[NPLAYER], Deck *deckCards){
             printf("Il giocatore e' un NPC? (s o n)\n");
             scanf("%c", &NPC);
         }while(!(NPC == 's' || NPC == 'n'));
+
+        if(NPC == 's'){
+            players[i].PlayerType = NPC;
+        }else{
+            players[i].PlayerType = HUMAN;
+        }
+
+        #endif
         players[i].alive = true;
         players[i].nCards = 0;
     }
-    #endif
 
     loadMode(players, sc, deckCards);
 }
 
 //Caricamento modalità da file
-void loadMode(Player players[NPLAYER], const int mode, Deck *deckCards){
+void loadMode(Player players[NPLAYERS], const int mode, Deck *deckCards){
     FILE *fp = NULL;
     int totCards = 0, countExplosiveCards = 0, countMeowCards = 0, i;
     int nExplosive, nMeow, nDjanni, cardType;
@@ -161,13 +168,13 @@ void loadMode(Player players[NPLAYER], const int mode, Deck *deckCards){
     //Caricamento carte in memoria da file
     while(!feof(fp) && totCards < (nDjanni+nExplosive+nMeow)){
         fscanf(fp, "%i %[^\n]s\n", &cardType, description);
-        if(cardType == 0){
+        if(cardType == EXPLODINGDJANNI){
             //Carte explosive
             explosiveCards[countExplosiveCards].cardType = cardType;
             strcpy(explosiveCards[countExplosiveCards].description, description);
             countExplosiveCards++;
-        }else if(cardType == 1){
-            //Carte meow (4)
+        }else if(cardType == MEOOOW){
+            //Carte meow 
             meowCards[countMeowCards].cardType = cardType;
             strcpy(meowCards[countMeowCards].description, description);
             countMeowCards++;
@@ -197,15 +204,49 @@ void loadMode(Player players[NPLAYER], const int mode, Deck *deckCards){
     for(i = 0; i < nExplosive; i++){
         deckCards = insertHead(deckCards, explosiveCards[i]);
     }
-    //Cancellazione memoria occupata da lista carte meow ed explosive
+
+    //Cancellazione memoria occupata dalla lista carte meow ed explosive
     free(meowCards);
     free(explosiveCards);
+
     //Il deck viene mischiato con le nuove carte
     shuffleDeck(deckCards);
 
 
     #if (DEBUG == 1)
         //printf("\n\nstart %i\n\n", (nDjanni+nMeow+nExplosive));
-        printList(deckCards);
+        //printList(deckCards);
     #endif
+
+    startGame(players, deckCards, nRound);
+}
+
+void startGame(Player players[NPLAYERS], Deck *deckCards, int nRound){
+    int currentPlayer;
+
+    //Scelta casuale primo giocatore
+    currentPlayer = rand() % NPLAYERS;
+
+    printf(COLOR_WHITE_BLINK "\nCaricamento file di gioco completato, premi invio per iniziare a giocare." COLOR_RESET);
+    getchar();
+    getchar();
+    while(true){
+        clearConsole();
+        if(currentPlayer >= 4){
+            //Reset turno giocatore
+            currentPlayer = 0;
+        }
+        if(players[currentPlayer].alive == true && players[currentPlayer].playerType == HUMAN){
+            //Controllo morte giocatore
+            printf("\nTocca a %s\nLe tue carte:\n", players[currentPlayer].name);
+
+            printDeck(players[currentPlayer].cards, players[currentPlayer].nCards);
+
+            currentPlayer++;
+            nRound++;
+        }else if(players[currentPlayer].alive == true && players[currentPlayer].playerType == NPC){
+
+        }
+        break;
+    }
 }

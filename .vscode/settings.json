@@ -3,6 +3,14 @@
 		"*h*hutility": "cpp",
 		"initializer_list": "cpp",
 		"*h*h*h*h*h*h*h*h*h*h*h*h*h*h*h*h*h*h*h*h*h*h*h*h*h*h*h*h*harray": "cpp",
-		"*h*harray": "cpp"
+		"*h*harray": "cpp",
+		"*hutility": "cpp",
+		"utility": "cpp",
+		"*h*h*h*h*h*h*h*h*h*h*h*h*h*h*h*h*h*h*h*h*htype_traits": "cpp",
+		"type_traits": "cpp",
+		"*h*h*h*h*h*h*h*h*h*h*h*h*h*h*h*h*h*h*h*htuple": "cpp",
+		"array": "cpp",
+		"*h*h*h*h*h*h*h*hfunctional": "cpp",
+		"functional": "cpp"
 	}
 }

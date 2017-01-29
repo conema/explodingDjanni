@@ -10,12 +10,12 @@ Deck* insertHead(Deck *first, Card card){
 }
 
 //Dimensione totale lista
-int ListDimension(Deck *first){
+int listDimension(Deck *first){
 	if(first == NULL){
     	return 0;
   	}
  
-  	return ListDimension(first->next) + 1;
+  	return listDimension(first->next) + 1;
 }
 
 void printList(Deck *first){

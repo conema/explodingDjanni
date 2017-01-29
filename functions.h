@@ -10,8 +10,9 @@ _Bool isDigit(int digit);
 void inlineHelper(const int, char**);
 void intro();
 void clearConsole();
-void menu(Player players[NPLAYER], Deck*);
-void newGame(Player players[NPLAYER], Deck*);
-void loadMode(Player palyers[NPLAYER], const int, Deck*);
+void menu(Player players[NPLAYERS], Deck*);
+void newGame(Player players[NPLAYERS], Deck*);
+void loadMode(Player palyers[NPLAYERS], const int, Deck*);
+void startGame(Player players[NPLAYERS], Deck *deckCards, int nRound);
 
 #endif // FUNCTIONS_H_

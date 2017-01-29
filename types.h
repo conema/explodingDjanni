@@ -2,7 +2,7 @@
 #define TYPES_H_
 
 #include "commons.h"
-typedef enum {NOPE, ATTACK, SKIP, FAVOR, SEETHEFUTURE, SHUFFLE, DJANNICARD, EXPLODINGDJANNI, MEOOOW} CardType;
+typedef enum {EXPLODINGDJANNI, MEOOOW, SHUFFLE, NOPE, SEETHEFUTURE, ATTACK, SKIP, FAVOR, DJANNICARD} CardType;
 typedef enum {HUMAN, NPC} PlayerType;
 
 typedef struct{

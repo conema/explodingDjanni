@@ -6,8 +6,10 @@
 - Shuffle cards: ok
 - Give cards: ok
 
-##To-do:
+##Ongoing:
 - Game
+
+##To-do:
 - Loading game
 - Saving game
 - NPC

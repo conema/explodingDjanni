@@ -6,7 +6,7 @@ void shuffleDeck(Deck *deckCards){
 	Card temp;
 	Deck *current = deckCards;
 
-	size = ListDimension(deckCards);
+	size = listDimension(deckCards);
 
 	Card* DeckTemp = NULL;
 	DeckTemp = (Card*)malloc(size*sizeof(Card));
@@ -42,10 +42,11 @@ void shuffleDeck(Deck *deckCards){
 
 
 //Stampa le carte
-void printDeck(Card *deckCards, const int size){
+void printDeck(Card *cards, const int size){
 	int i;
 	for(i = 0; i < size; i++){
-		printf("Tipo: %i\nDescrizione: %s\n\n", deckCards[i].cardType, deckCards[i].description);
+		printf("\n    (%i)    ", i);
+		printCard(cards[i]);
 	}
 }
 
@@ -54,7 +55,7 @@ Deck* giveCards(Player* players, Deck *deckCards, Card * meowCards, int *nMeow){
 	int i, j;
 	Deck *temp = deckCards;
 
-	for(i = 0; i < NPLAYER; i++){
+	for(i = 0; i < NPLAYERS; i++){
 		players[i].cards = (Card*)malloc((CARDSFORPLAYER+1) * sizeof(Card));	//Carte per giocatori + carta meow
 		if(players[i].cards == NULL){
         	printf("Problemi con la memoria.\n");
@@ -65,9 +66,11 @@ Deck* giveCards(Player* players, Deck *deckCards, Card * meowCards, int *nMeow){
 		for(j = 0; j < CARDSFORPLAYER; j++){
 			players[i].cards[j] = temp->card;
 			temp = deleteHead(temp);
+			players[i].nCards++;
 		}
 		players[i].cards[CARDSFORPLAYER] = meowCards[i]; 						//Assegnamento carta meow
 		*nMeow = *nMeow-1;
+		players[i].nCards++;
 	}
 
 	return temp;
@@ -75,9 +78,11 @@ Deck* giveCards(Player* players, Deck *deckCards, Card * meowCards, int *nMeow){
 
 //Stampa la carta
 void printCard(Card card){
-	printf("Numero: %i\nDescrizione: %s\n", card.cardType, card.description);
+	printType(card);
+	printf(" \n    %s\n", card.description);
 }
 
-void newLog(){
-
+void printType(Card card){
+	char type[][16] = {"EXPLODINGDJANNI", "MEOOOW", "SHUFFLE", "NOPE", "SEETHEFUTURE", "ATTACK", "SKIP", "FAVOR", "DJANNICARD"};
+	printf("%s", type[card.cardType]);
 }

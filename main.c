@@ -24,7 +24,7 @@ Note dall'autore:
 #include "functions.h"
 
 int main(int argc, char *argv[]){
-  Player players[NPLAYER];
+  Player players[NPLAYERS];
   Deck *deckCards = NULL;
 
   srand(time(NULL));
