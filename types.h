@@ -18,4 +18,9 @@ typedef struct{
 	Card* cards;
 }Player;
 
+typedef struct deck{
+	Card card;
+	struct deck *next;
+}Deck;
+
 #endif // TYPES_H_

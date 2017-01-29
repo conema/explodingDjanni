@@ -3,9 +3,11 @@
 
 #include "commons.h"
 #include "types.h"
+#include "listFunctions.h"
 
-void shuffleDeck(Card *deckCards, const int size);
+void shuffleDeck(Deck *deckCards);
 void printDeck(Card *deckCards, const int size);
-void giveCards(Player* players, Card *deckCards/*, Card * explosiveCards, Card * meowCards, const int djanni, const int explosive, const int meow*/);
+Deck* giveCards(Player* players, Deck *deckCards, Card * meowCards, int *nMeow);
+void printCard(Card card);
 
 #endif // GAME_FUNCTIONS_H_

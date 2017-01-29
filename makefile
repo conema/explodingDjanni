@@ -1,5 +1,5 @@
 CC = gcc
-FILES = main.c functions.c gameFunctions.c
+FILES = main.c functions.c gameFunctions.c listFunctions.c
 CC_FLAGS = -Wall -Wextra -g
 
 all:

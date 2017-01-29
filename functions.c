@@ -48,7 +48,7 @@ void clearConsole(){
 }
 
 //Menù iniziale
-void menu(Player players[NPLAYER], Card *deckCards){
+void menu(Player players[NPLAYER], Deck *deckCards){
     int sc = 0;
     do{
         printf(
@@ -80,7 +80,7 @@ void menu(Player players[NPLAYER], Card *deckCards){
 }
 
 //Inizio nuova partita
-void newGame(Player players[NPLAYER], Card *deckCards){
+void newGame(Player players[NPLAYER], Deck *deckCards){
     int sc = 0;
     int i;
     char NPC;
@@ -121,12 +121,14 @@ void newGame(Player players[NPLAYER], Card *deckCards){
 }
 
 //Caricamento modalità da file
-void loadMode(Player players[NPLAYER], const int mode, Card *deckCards){
+void loadMode(Player players[NPLAYER], const int mode, Deck *deckCards){
     FILE *fp = NULL;
-    int totCards = 0, countDjanniCards = 0, countExplosiveCards = 0, countMeowCards = 0;
-    int explosive, meow, djanni, cardType;
+    int totCards = 0, countExplosiveCards = 0, countMeowCards = 0, i;
+    int nExplosive, nMeow, nDjanni, cardType;
+    int nRound = 0;
     char description[STRLEN];
     Card *explosiveCards, *meowCards;
+    Card newCard;
 
     switch(mode){
         case 1:
@@ -146,49 +148,64 @@ void loadMode(Player players[NPLAYER], const int mode, Card *deckCards){
     }
 
     //Lettura su file della quantità delle carte
-    fscanf(fp, "%i %i %i\n", &explosive, &meow, &djanni);
+    fscanf(fp, "%i %i %i\n", &nExplosive, &nMeow, &nDjanni);
 
-    deckCards = (Card*)malloc(sizeof(Card)*djanni);
-    explosiveCards = (Card*)malloc(sizeof(Card)*explosive);
-    meowCards = (Card*)malloc(sizeof(Card)*meow);
+    explosiveCards = (Card*)malloc(sizeof(Card)*nExplosive);
+    meowCards = (Card*)malloc(sizeof(Card)*nMeow);
 
-    if(deckCards == NULL || explosiveCards == NULL|| meowCards == NULL){
+    if(explosiveCards == NULL|| meowCards == NULL){
         printf("Problemi con la memoria.\n");
         exit(-1);
     }
 
     //Caricamento carte in memoria da file
-    while(!feof(fp) && totCards < (djanni+explosive+meow)){
+    while(!feof(fp) && totCards < (nDjanni+nExplosive+nMeow)){
         fscanf(fp, "%i %[^\n]s\n", &cardType, description);
         if(cardType == 0){
+            //Carte explosive
             explosiveCards[countExplosiveCards].cardType = cardType;
             strcpy(explosiveCards[countExplosiveCards].description, description);
             countExplosiveCards++;
         }else if(cardType == 1){
+            //Carte meow (4)
             meowCards[countMeowCards].cardType = cardType;
             strcpy(meowCards[countMeowCards].description, description);
             countMeowCards++;
         }else{
-            deckCards[countDjanniCards].cardType = cardType;
-            strcpy(deckCards[countDjanniCards].description, description);
-            countDjanniCards++;
+            //Tutte le altre carte
+            newCard.cardType = cardType;
+            strcpy(newCard.description, description);
+
+            deckCards = insertHead(deckCards, newCard);
         }
 
         totCards++;
     }
     fclose(fp);
 
-    //Il mazzo viene mischiato
-    shuffleDeck(deckCards, djanni);
+    //Il Deck viene mischiato
+    shuffleDeck(deckCards);
 
-     #if (DEBUG == 1)
-        printDeck(deckCards, djanni);
-    #endif
+    //Le carte vengono consegnate
+    deckCards = giveCards(players, deckCards, meowCards, &nMeow);
 
-    giveCards(players, deckCards/*, explosiveCards, meowCards, djanni, explosive, meow*/);
+    //Aggiunta carte meow al mazzo
+    for(i = nMeow; i > 0; i--){
+        deckCards = insertHead(deckCards, meowCards[i]);
+    }
+    //Aggiunta carte explosive al mazzo
+    for(i = 0; i < nExplosive; i++){
+        deckCards = insertHead(deckCards, explosiveCards[i]);
+    }
+    //Cancellazione memoria occupata da lista carte meow ed explosive
+    free(meowCards);
+    free(explosiveCards);
+    //Il deck viene mischiato con le nuove carte
+    shuffleDeck(deckCards);
 
-    printf("\n\nstart\n\n");
+
     #if (DEBUG == 1)
-        printDeck(players[0].cards, 4);
+        //printf("\n\nstart %i\n\n", (nDjanni+nMeow+nExplosive));
+        printList(deckCards);
     #endif
 }
