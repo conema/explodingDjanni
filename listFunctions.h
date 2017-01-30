@@ -6,6 +6,7 @@
 #include "gameFunctions.h"
 
 Deck* insertHead(Deck *first, Card card);
+Deck* moveCard(Deck *first, const int from, const int to);
 int listDimension(Deck *first);
 void printList(Deck *first);
 Deck* deleteHead(Deck *first);

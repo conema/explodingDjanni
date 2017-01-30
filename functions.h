@@ -10,6 +10,7 @@ _Bool isDigit(int digit);
 void inlineHelper(const int, char**);
 void intro();
 void clearConsole();
+void checkNumber(int *n);
 void menu(Player players[NPLAYERS], Deck*);
 void newGame(Player players[NPLAYERS], Deck*);
 void loadMode(Player palyers[NPLAYERS], const int, Deck*);

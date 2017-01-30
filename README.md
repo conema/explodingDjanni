@@ -8,6 +8,8 @@
 
 ##Ongoing:
 - Game
+- moveCard function
+
 
 ##To-do:
 - Loading game

@@ -9,6 +9,11 @@ Deck* insertHead(Deck *first, Card card){
   return nuovoNodo;
 }
 
+//Inserimento in posizione
+Deck* moveCard(Deck *first, const int from, const int to){
+
+}
+
 //Dimensione totale lista
 int listDimension(Deck *first){
 	if(first == NULL){
@@ -28,7 +33,7 @@ void printList(Deck *first){
 }
 
 Deck* deleteHead(Deck *first){
-  if(first->next != NULL){
+  if(first != NULL){
     Deck *tempNodo = first;
     first = first->next;
     free(tempNodo);

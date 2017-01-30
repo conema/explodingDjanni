@@ -47,6 +47,15 @@ void clearConsole(){
     #endif
 }
 
+//Controllo input numerico
+void checkNumber(int *n){
+    //Controllo input numerico
+    if(!scanf("%i", n)){
+        printf("E' stato inserito un carattere non valido.\n");
+        exit(-1);
+    }
+}
+
 //Menù iniziale
 void menu(Player players[NPLAYERS], Deck *deckCards){
     int sc = 0;
@@ -58,11 +67,7 @@ void menu(Player players[NPLAYERS], Deck *deckCards){
             "Qual'e' la tua scelta?\n"
         );
 
-        //Controllo input numerico
-        if(!scanf("%i", &sc)){
-            printf("E' stato inserito un carattere non valido.\n");
-            return;
-        }
+        checkNumber(&sc);
     }while(!(sc >= FIRSTCHOICE && sc <= LASTCHOICE));
 
 
@@ -92,12 +97,7 @@ void newGame(Player players[NPLAYERS], Deck *deckCards){
             "(2) Allenamento\n"
             "(3) TrucidaMici\n"
             );
-
-        //Controllo input numerico
-        if(!scanf("%i", &sc)){
-            printf("E' stato inserito un carattere non valido.\n");
-            return;
-        }
+        checkNumber(&sc);
     }while(!(sc >= FIRSTCHOICE && sc <= LASTCHOICE));
 
     printf("Perfetto, hai scelto la modalità N°%i, preparatevi alla battaglia!\n", sc);
@@ -109,17 +109,22 @@ void newGame(Player players[NPLAYERS], Deck *deckCards){
         scanf("%23s", players[i].name);
         getchar();
         do{
-            printf("Il giocatore e' un NPC? (s o n)\n");
+            printf("Il giocatore e' un NPC? (y o n)\n");
             scanf("%c", &NPC);
-        }while(!(NPC == 's' || NPC == 'n'));
+        }while(!(NPC == 'y' || NPC == 'n'));
 
-        if(NPC == 's'){
-            players[i].PlayerType = NPC;
+        if(NPC == 'y'){
+            players[i].playerType = NPC;
         }else{
-            players[i].PlayerType = HUMAN;
+            players[i].playerType = HUMAN;
         }
 
         #endif
+
+        #if (DEBUG == 1)
+        players[i].playerType = HUMAN;
+        #endif
+
         players[i].alive = true;
         players[i].nCards = 0;
     }
@@ -222,31 +227,49 @@ void loadMode(Player players[NPLAYERS], const int mode, Deck *deckCards){
 }
 
 void startGame(Player players[NPLAYERS], Deck *deckCards, int nRound){
-    int currentPlayer;
+    int currentPlayer, sc;
 
     //Scelta casuale primo giocatore
     currentPlayer = rand() % NPLAYERS;
 
+    getchar();
     printf(COLOR_WHITE_BLINK "\nCaricamento file di gioco completato, premi invio per iniziare a giocare." COLOR_RESET);
     getchar();
-    getchar();
+
     while(true){
-        clearConsole();
         if(currentPlayer >= 4){
             //Reset turno giocatore
             currentPlayer = 0;
         }
         if(players[currentPlayer].alive == true && players[currentPlayer].playerType == HUMAN){
-            //Controllo morte giocatore
-            printf("\nTocca a %s\nLe tue carte:\n", players[currentPlayer].name);
+            do{
+                clearConsole();
+                printf("\nTurno: %i, tocca a %s\nLe tue carte:\n", nRound,players[currentPlayer].name);
+                printDeck(players[currentPlayer].cards, players[currentPlayer].nCards);
 
-            printDeck(players[currentPlayer].cards, players[currentPlayer].nCards);
+		        printf("\n(0) Gioca carta\n(1) Pesca carta\n(2) Salva la partita\n");
+		        checkNumber(&sc);
 
-            currentPlayer++;
+                if(sc == 0){
+                    chooseCard(players, currentPlayer);
+	            }else if(sc == 2){
+			        printf("Partita salvata\n");
+		        }
+	        }while(sc != 1);
+
+            if(sc == 1){
+                deckCards = drawCard(&players[currentPlayer], deckCards);
+            }
+
             nRound++;
+            
+            getchar();
+            printf("\nPremi invio per iniziare il nuovo turno.\n");
+            getchar();
         }else if(players[currentPlayer].alive == true && players[currentPlayer].playerType == NPC){
 
         }
-        break;
+
+        currentPlayer++;
     }
 }
