@@ -56,21 +56,20 @@ Deck* giveCards(Player* players, Deck *deckCards, Card * meowCards, int *nMeow){
 	Deck *temp = deckCards;
 
 	for(i = 0; i < NPLAYERS; i++){
-		players[i].cards = (Card*)malloc((CARDSFORPLAYER+1) * sizeof(Card));	//Carte per giocatori + carta meow
+		players[i].cards = (Card*)malloc(0);	//Alloco memoria 0, poi verrà riallocata in seguito per ogni carta
 		if(players[i].cards == NULL){
         	printf("Problemi con la memoria.\n");
         	exit(-1);
 		}
 
-		//La carta viene assegnata al giocatore e cancellata dal mazzo
 		for(j = 0; j < CARDSFORPLAYER; j++){
-			players[i].cards[j] = temp->card;
+			//La carta viene assegnata al giocatore e cancellata dal mazzo
+			addCardPlayer(&players[i], temp->card);
 			temp = deleteHead(temp);
-			players[i].nCards++;
 		}
-		players[i].cards[CARDSFORPLAYER] = meowCards[i]; 						//Assegnamento carta meow
+		//Assegnamento carta meow
+		addCardPlayer(&players[i], meowCards[i]);
 		*nMeow = *nMeow-1;
-		players[i].nCards++;
 	}
 
 	return temp;
@@ -88,6 +87,17 @@ void printType(Card card){
 	printf("%s", type[card.cardType]);
 }
 
+//Conta giocatori vuoti
+int countAlive(const Player players[NPLAYERS]){
+	int i, cont = 0;
+	for(i = 0; i < NPLAYERS; i++){
+		if(players[i].alive == true){
+			cont++;
+		}
+	}
+	return cont;
+}
+
 //Elimina la carta del giocatore
 void removeCardPlayer(Player* player, const int pos){
 	Card tempCard;
@@ -100,6 +110,17 @@ void removeCardPlayer(Player* player, const int pos){
 
 	//Re-allocazione della memoria
 	(*player).cards = (Card*)realloc((*player).cards, nCards * sizeof(Card));
+}
+
+//Aggiungere carta al mazzo del giocatore
+void addCardPlayer(Player* player, Card card){
+	int nCards = ++(*player).nCards;
+
+	//Re-allocazione della memoria
+	(*player).cards = (Card*)realloc((*player).cards, nCards * sizeof(Card));
+
+	//La carta viene aggiunta
+	(*player).cards[nCards-1] = card;
 }
 
 //Gioca una carta
@@ -116,35 +137,29 @@ void chooseCard(Player players[NPLAYERS], const int currentPlayer){
 		removeCardPlayer(&players[currentPlayer], sc);
 
 	}else{
-		printf("Non hai più carte in mano.");
+		printf("Non hai più carte in mano.\n");
 	}
 
 }
 
 //Pesca una carta
 Deck* drawCard(Player* player, Deck* deckCards){
-	int nCards;
-
 	if(deckCards == NULL){
 		printf("Il mazzo è vuoto\n");
 	}else{
-		nCards = ++(*player).nCards;
-
-		//Re-allocazione della memoria
-		(*player).cards = (Card*)realloc((*player).cards, nCards * sizeof(Card));
-
 		if(deckCards->card.cardType == EXPLODINGDJANNI){
-		    isExplosive(player, deckCards);
+		    deckCards = isExplosive(player, deckCards);
 		}else{
 			//Viene aggiunta la carta pescata
-			(*player).cards[nCards-1] = deckCards->card;
+			addCardPlayer(player, deckCards->card);
+			deckCards = deleteHead(deckCards);
 		}
 	}
 
-	return deleteHead(deckCards);
+	return deckCards;
 }
 
-void isExplosive(Player* player, Deck* deckCards){
+Deck* isExplosive(Player* player, Deck* deckCards){
 	_Bool meow = false;
 	int i, meowPos, nRand;
 	char sc;
@@ -177,16 +192,22 @@ void isExplosive(Player* player, Deck* deckCards){
 		if(sc == 'y'){
 			//Spostamento casuale carta explosion
 			nRand = rand()%(listDimension(deckCards)-1);
-			moveCard(deckCards, 0, nRand);
+			deckCards = moveCard(deckCards, 0, nRand);
 
 			//Rimozione carta meow del giocatore
 			removeCardPlayer(player, meowPos);
 		}else{
 			printf("Hai deciso di morire... Sadico...");
 			(*player).alive = false;
+			free((*player).cards);
+			deckCards = deleteHead(deckCards);
 		}
 	}else{
 		printf("Sei morto!");
 		(*player).alive = false;
+		free((*player).cards);
+		deckCards = deleteHead(deckCards);
 	}
+
+	return deckCards;
 }

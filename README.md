@@ -5,10 +5,10 @@
 - Load game files: ok
 - Shuffle cards: ok
 - Give cards: ok
+- moveCard function: ok
 
 ##Ongoing:
 - Game
-- moveCard function
 
 
 ##To-do:

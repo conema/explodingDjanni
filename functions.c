@@ -227,7 +227,8 @@ void loadMode(Player players[NPLAYERS], const int mode, Deck *deckCards){
 }
 
 void startGame(Player players[NPLAYERS], Deck *deckCards, int nRound){
-    int currentPlayer, sc;
+    int currentPlayer, sc, playersAlive;
+    _Bool playing = true;
 
     //Scelta casuale primo giocatore
     currentPlayer = rand() % NPLAYERS;
@@ -236,12 +237,14 @@ void startGame(Player players[NPLAYERS], Deck *deckCards, int nRound){
     printf(COLOR_WHITE_BLINK "\nCaricamento file di gioco completato, premi invio per iniziare a giocare." COLOR_RESET);
     getchar();
 
-    while(true){
+    while(playing){
         if(currentPlayer >= 4){
             //Reset turno giocatore
             currentPlayer = 0;
         }
-        if(players[currentPlayer].alive == true && players[currentPlayer].playerType == HUMAN){
+
+        playersAlive = countAlive(players);
+        if(players[currentPlayer].alive == true && players[currentPlayer].playerType == HUMAN && playersAlive > 1){
             do{
                 clearConsole();
                 printf("\nTurno: %i, tocca a %s\nLe tue carte:\n", nRound,players[currentPlayer].name);
@@ -268,6 +271,10 @@ void startGame(Player players[NPLAYERS], Deck *deckCards, int nRound){
             getchar();
         }else if(players[currentPlayer].alive == true && players[currentPlayer].playerType == NPC){
 
+        }else if(players[currentPlayer].alive == true && players[currentPlayer].playerType == HUMAN && playersAlive == 1){
+            clearConsole();
+            playing = false;
+            printf("\n\nComplimenti %s, hai vinto la partita!\n\n", players[currentPlayer].name);
         }
 
         currentPlayer++;
