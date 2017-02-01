@@ -88,7 +88,7 @@ void menu(Player players[NPLAYERS], Deck *deckCards){
 void newGame(Player players[NPLAYERS], Deck *deckCards){
     int sc = 0;
     int i;
-    char NPC;
+    char scc;
 
     do{
         printf(
@@ -110,10 +110,10 @@ void newGame(Player players[NPLAYERS], Deck *deckCards){
         getchar();
         do{
             printf("Il giocatore e' un NPC? (y o n)\n");
-            scanf("%c", &NPC);
-        }while(!(NPC == 'y' || NPC == 'n'));
+            scanf("%c", &scc);
+        }while(!(scc == 'y' || scc == 'n'));
 
-        if(NPC == 'y'){
+        if(scc == 'y'){
             players[i].playerType = NPC;
         }else{
             players[i].playerType = HUMAN;
@@ -227,8 +227,8 @@ void loadMode(Player players[NPLAYERS], const int mode, Deck *deckCards){
 }
 
 void startGame(Player players[NPLAYERS], Deck *deckCards, int nRound){
-    int currentPlayer, sc, playersAlive;
-    _Bool playing = true;
+    int currentPlayer, sc, playersAlive, special = 0;
+    _Bool playing = true, attackNext = false;
 
     //Scelta casuale primo giocatore
     currentPlayer = rand() % NPLAYERS;
@@ -244,9 +244,11 @@ void startGame(Player players[NPLAYERS], Deck *deckCards, int nRound){
         }
 
         playersAlive = countAlive(players);
+
         if(players[currentPlayer].alive == true && players[currentPlayer].playerType == HUMAN && playersAlive > 1){
             do{
                 clearConsole();
+
                 printf("\nTurno: %i, tocca a %s\nLe tue carte:\n", nRound,players[currentPlayer].name);
                 printDeck(players[currentPlayer].cards, players[currentPlayer].nCards);
 
@@ -254,29 +256,39 @@ void startGame(Player players[NPLAYERS], Deck *deckCards, int nRound){
 		        checkNumber(&sc);
 
                 if(sc == 0){
-                    chooseCard(players, currentPlayer);
+                    chooseCard(deckCards, players, currentPlayer, &special);
 	            }else if(sc == 2){
 			        printf("Partita salvata\n");
 		        }
-	        }while(sc != 1);
 
-            if(sc == 1){
-                deckCards = drawCard(&players[currentPlayer], deckCards);
-            }
-
-            nRound++;
-            
-            getchar();
-            printf("\nPremi invio per iniziare il nuovo turno.\n");
-            getchar();
+                getchar();
+                printf("\nPremi invio per continuare.\n");
+                getchar();
+	        }while(sc != 1 && special == 0); 
         }else if(players[currentPlayer].alive == true && players[currentPlayer].playerType == NPC){
 
-        }else if(players[currentPlayer].alive == true && players[currentPlayer].playerType == HUMAN && playersAlive == 1){
+        }
+        
+        if(players[currentPlayer].alive == true && players[currentPlayer].playerType == HUMAN && playersAlive == 1){
             clearConsole();
             playing = false;
             printf("\n\nComplimenti %s, hai vinto la partita!\n\n", players[currentPlayer].name);
+        }else if(players[currentPlayer].alive == true && playersAlive != 1){
+            if(sc == 1 && special != SKIP && special != ATTACK){
+                deckCards = drawCard(&players[currentPlayer], deckCards);
+            }
+
+            if(special == ATTACK && attackNext == false){
+                attackNext = true;
+            }else if(special != ATTACK && attackNext == true){
+                currentPlayer--;
+                attackNext = false;
+            }
+
+            special = 0;
         }
 
+        nRound++;
         currentPlayer++;
     }
 }

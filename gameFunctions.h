@@ -12,10 +12,12 @@ Deck* giveCards(Player* players, Deck *deckCards, Card * meowCards, int *nMeow);
 void printCard(Card card);
 void printType(Card card);
 int countAlive(const Player players[NPLAYERS]);
-void removeCardPlayer(Player* player, const int pos);
+Card removeCardPlayer(Player* player, const int pos);
 void addCardPlayer(Player* player, Card card);
-void chooseCard(Player players[NPLAYERS], const int currentPlayer);
+void chooseCard(Deck *deckCards, Player players[NPLAYERS], const int currentPlayer, int *special);
 Deck* drawCard(Player* player, Deck* deckCards);
 Deck* isExplosive(Player* player, Deck* deckCards);
+void cardEffect(Deck *deckCards, Player players[NPLAYERS], const Card card, const int currentPlayer, int *special);
+_Bool callNope(Player players[NPLAYERS], const int currentPlayer, const Card card);
 
 #endif // GAME_FUNCTIONS_H_
