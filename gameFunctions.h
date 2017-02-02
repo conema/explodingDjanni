@@ -12,6 +12,7 @@ Deck* giveCards(Player* players, Deck *deckCards, Card * meowCards, int *nMeow);
 void printCard(Card card);
 void printType(Card card);
 int countAlive(const Player players[NPLAYERS]);
+void printAlive(const Player players[NPLAYERS], const int currentPlayer);
 Card removeCardPlayer(Player* player, const int pos);
 void addCardPlayer(Player* player, Card card);
 void chooseCard(Deck *deckCards, Player players[NPLAYERS], const int currentPlayer, int *special);

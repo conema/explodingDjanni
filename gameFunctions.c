@@ -98,6 +98,16 @@ int countAlive(const Player players[NPLAYERS]){
 	return cont;
 }
 
+//Stampa i nomi dei giocatori in vita
+void printAlive(const Player players[NPLAYERS], const int currentPlayer){
+	int i;
+	for(i = 0; i < NPLAYERS; i++){
+		if(players[i].alive == true && i != currentPlayer){
+			printf("(%i) %s\n", i, players[i].name);
+		}
+	}
+}
+
 //Elimina la carta del giocatore
 Card removeCardPlayer(Player* player, const int pos){
 	Card tempCard;
@@ -136,7 +146,10 @@ void chooseCard(Deck *deckCards, Player players[NPLAYERS], const int currentPlay
 			checkNumber(&sc);
 		}while(sc < 0 || sc >= nCards);
 
-		cardEffect(deckCards, players, players[currentPlayer].cards[sc], currentPlayer, special);
+		if(players[currentPlayer].cards[sc].cardType != NOPE){
+			cardEffect(deckCards, players, players[currentPlayer].cards[sc], currentPlayer, special);
+		}
+
 		removeCardPlayer(&players[currentPlayer], sc);
 	}else{
 		printf("Non hai più carte in mano.\n");
@@ -216,6 +229,9 @@ Deck* isExplosive(Player* player, Deck* deckCards){
 
 //Controllo dell'effetto speciale della carta
 void cardEffect(Deck *deckCards, Player players[NPLAYERS], const Card card, const int currentPlayer, int *special){
+	int i, scPlayer = 0, scCard = 0;
+	Deck *tempDeck = deckCards;
+	Card tempCard;
 	_Bool noped = false;
 	if(card.cardType != MEOOOW && card.cardType != EXPLODINGDJANNI){
 		//Viene richiesto agli altri giocatori se  voglio invocare la loro nope
@@ -226,7 +242,12 @@ void cardEffect(Deck *deckCards, Player players[NPLAYERS], const Card card, cons
 				printf("Il mazzo viene mischiato.\n");
 				shuffleDeck(deckCards);
 			}else if(card.cardType == SEETHEFUTURE){
-
+				clearConsole();
+				printf("Le prime 3 carte del mazzo:\n");
+				for(i = 0; i < 3 && tempDeck != NULL; i++){
+					printCard(tempDeck->card);
+					tempDeck = tempDeck->next;
+				}
 			}else if(card.cardType == ATTACK){
 				printf("Il giocatore attacca il prossimo giocatore. \n");
 				*special = ATTACK;
@@ -234,7 +255,30 @@ void cardEffect(Deck *deckCards, Player players[NPLAYERS], const Card card, cons
 				printf("Il giocatore salta il turno. \n");
 				*special = SKIP;
 			}else if(card.cardType == FAVOR){
+				clearConsole();
+				do{
+					printf("A quale giocatore vuoi chiedere il favore?\n");
+					printAlive(players, currentPlayer);
+					checkNumber(&scPlayer);
+				}while(scPlayer < 0 || scPlayer >= (NPLAYERS) || scPlayer == currentPlayer || players[scPlayer].alive == false);
 
+				do{
+					printf("%s, devi cedere una carta a %s, decidi tra le tue carte:\n", players[scPlayer].name, players[currentPlayer].name);
+					printDeck(players[scPlayer].cards, players[scPlayer].nCards);
+					printf("Che carta vuoi dare?\n");
+					checkNumber(&scCard);
+				}while(scCard < 0 || scCard > players[scPlayer].nCards);
+
+				clearConsole();
+
+				printf("%s ti ha dato la carta ", players[scPlayer].name);
+				printType(players[scPlayer].cards[scCard]);
+				printf("\n");
+
+				tempCard = players[scPlayer].cards[scCard];
+
+				removeCardPlayer(&players[scPlayer], scCard);
+				addCardPlayer(&players[currentPlayer], tempCard);
 			}
 		}else{
 			printf("La tua carta è stata annullata da una carta NOPE!\n");
@@ -246,6 +290,7 @@ void cardEffect(Deck *deckCards, Player players[NPLAYERS], const Card card, cons
 _Bool callNope(Player players[NPLAYERS], const int currentPlayer, const Card card){
 	int i, j;
 	char sc;
+	Card cardTemp;
 	for(i = 0; i < NPLAYERS; i++){
 		if(players[i].alive && i != currentPlayer){
 			for(j = 0; j < players[i].nCards; j++){
@@ -260,8 +305,15 @@ _Bool callNope(Player players[NPLAYERS], const int currentPlayer, const Card car
         			}while(!(sc == 'y' || sc == 'n'));
 
         			if(sc == 'y'){
+						cardTemp = players[i].cards[j];
 						removeCardPlayer(&players[i], j);
-						return true;
+
+						//Viene chiesto agli altri player se vogliono annullare la nome
+						if(callNope(players, i, cardTemp)){
+							return false;
+						}else{
+							return true;
+						}
         			}
 				}
 			}

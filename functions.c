@@ -273,7 +273,9 @@ void startGame(Player players[NPLAYERS], Deck *deckCards, int nRound){
             clearConsole();
             playing = false;
             printf("\n\nComplimenti %s, hai vinto la partita!\n\n", players[currentPlayer].name);
-        }else if(players[currentPlayer].alive == true && playersAlive != 1){
+        }
+        
+        if(players[currentPlayer].alive == true && playersAlive > 1){
             if(sc == 1 && special != SKIP && special != ATTACK){
                 deckCards = drawCard(&players[currentPlayer], deckCards);
             }
