@@ -20,5 +20,6 @@ Deck* drawCard(Player* player, Deck* deckCards);
 Deck* isExplosive(Player* player, Deck* deckCards);
 void cardEffect(Deck *deckCards, Player players[NPLAYERS], const Card card, const int currentPlayer, int *special);
 _Bool callNope(Player players[NPLAYERS], const int currentPlayer, const Card card);
+void specialDjanni(Player player[NPLAYERS], const int currentPlayer , const int nDjanni);
 
 #endif // GAME_FUNCTIONS_H_

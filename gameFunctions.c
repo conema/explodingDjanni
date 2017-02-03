@@ -110,8 +110,10 @@ void printAlive(const Player players[NPLAYERS], const int currentPlayer){
 
 //Elimina la carta del giocatore
 Card removeCardPlayer(Player* player, const int pos){
-	Card tempCard;
+	Card tempCard, deletedCard;
 	int nCards = --(*player).nCards;
+
+	deletedCard = (*player).cards[pos];
 
 	//La carta da eliminare è spostata alla fine del mazzo
 	tempCard = (*player).cards[nCards];
@@ -121,7 +123,7 @@ Card removeCardPlayer(Player* player, const int pos){
 	//Re-allocazione della memoria
 	(*player).cards = (Card*)realloc((*player).cards, nCards * sizeof(Card));
 
-	return tempCard;
+	return deletedCard;
 }
 
 //Aggiungere carta al mazzo del giocatore
@@ -146,11 +148,7 @@ void chooseCard(Deck *deckCards, Player players[NPLAYERS], const int currentPlay
 			checkNumber(&sc);
 		}while(sc < 0 || sc >= nCards);
 
-		if(players[currentPlayer].cards[sc].cardType != NOPE){
-			cardEffect(deckCards, players, players[currentPlayer].cards[sc], currentPlayer, special);
-		}
-
-		removeCardPlayer(&players[currentPlayer], sc);
+		cardEffect(deckCards, players, removeCardPlayer(&players[currentPlayer], sc), currentPlayer, special);
 	}else{
 		printf("Non hai più carte in mano.\n");
 	}
@@ -229,13 +227,17 @@ Deck* isExplosive(Player* player, Deck* deckCards){
 
 //Controllo dell'effetto speciale della carta
 void cardEffect(Deck *deckCards, Player players[NPLAYERS], const Card card, const int currentPlayer, int *special){
-	int i, scPlayer = 0, scCard = 0;
+	int i, scPlayer = 0, scCard = 0, countDjanni = 0, nDjanni;
+	char sc;
 	Deck *tempDeck = deckCards;
 	Card tempCard;
 	_Bool noped = false;
 	if(card.cardType != MEOOOW && card.cardType != EXPLODINGDJANNI){
-		//Viene richiesto agli altri giocatori se  voglio invocare la loro nope
-		noped = callNope(players, currentPlayer, card);
+
+		if(card.cardType != NOPE && card.cardType != DJANNICARD){
+			//Viene richiesto agli altri giocatori se  voglio invocare la loro nope
+			noped = callNope(players, currentPlayer, card);
+		}
 
 		if(!noped){
 			if(card.cardType == SHUFFLE){
@@ -279,6 +281,42 @@ void cardEffect(Deck *deckCards, Player players[NPLAYERS], const Card card, cons
 
 				removeCardPlayer(&players[scPlayer], scCard);
 				addCardPlayer(&players[currentPlayer], tempCard);
+			}else if(card.cardType == DJANNICARD){
+				for(i = 0; i < players[currentPlayer].nCards; i++){
+					if(i != sc && !strcmp(card.description, players[currentPlayer].cards[i].description)){
+						countDjanni++;
+					}
+				}
+
+				if(countDjanni >= 1){
+					if(countDjanni > 2){
+						countDjanni = 2;
+					}
+
+					nDjanni = countDjanni;
+
+					do{
+						getchar();
+						printf("Sono state trovate %i %s uguali, vuoi giocarle insieme? (y o n)\n", countDjanni+1, card.description);
+						scanf("%c", &sc);
+					}while(!(sc == 'y' || sc == 'n'));
+
+					if(sc == 'y'){
+						//elimino le carte
+						for(i = 0; i < players[currentPlayer].nCards && nDjanni > 0; i++){
+							if(i != sc && !strcmp(card.description, players[currentPlayer].cards[i].description)){
+								removeCardPlayer(&players[currentPlayer], i);
+								nDjanni--;
+							}
+						}
+
+						if(!callNope(players, currentPlayer, card)){
+							specialDjanni(players, currentPlayer, countDjanni);
+						}else{
+							printf("Il tuo attacco è stato annulato!\n");
+						}
+					}
+				}
 			}
 		}else{
 			printf("La tua carta è stata annullata da una carta NOPE!\n");
@@ -321,4 +359,40 @@ _Bool callNope(Player players[NPLAYERS], const int currentPlayer, const Card car
 	}
 
 	return false;
+}
+
+
+//Rimozione djanni multipli e potere speciale
+void specialDjanni(Player players[NPLAYERS], const int currentPlayer, const int nDjanni){
+	Card tempCard;
+	int scPlayer = 0, scCard = 0;
+
+	clearConsole();
+	do{
+		printf("A quale giocatore vuoi chiedere la carta?\n");
+		printAlive(players, currentPlayer);
+		checkNumber(&scPlayer);
+	}while(scPlayer < 0 || scPlayer >= (NPLAYERS) || scPlayer == currentPlayer || players[scPlayer].alive == false);
+
+
+	do{
+		printf("%s, devi rubare una carta a %s, decidi tra le sue carte:\n", players[currentPlayer].name, players[scPlayer].name);
+
+		if(nDjanni == 3){
+			printDeck(players[scPlayer].cards, players[scPlayer].nCards);
+		}else{
+			printf("Scegli una carta tra 0 e %i\n", players[scPlayer].nCards-1);
+		}
+		printf("Che carta vuoi prendere?\n");
+		checkNumber(&scCard);
+	}while(scCard < 0 || scCard > players[scPlayer].nCards);
+
+	tempCard = players[scPlayer].cards[scCard];
+
+	removeCardPlayer(&players[scPlayer], scCard);
+	addCardPlayer(&players[currentPlayer], tempCard);
+
+	printf("Hai rubato una ");
+	printType(tempCard);
+	printf(" card\n");
 }
