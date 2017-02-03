@@ -13,7 +13,8 @@ void clearConsole();
 void checkNumber(int *n);
 void menu(Player players[NPLAYERS], Deck*);
 void newGame(Player players[NPLAYERS], Deck*);
+void loadGame(Player players[NPLAYERS], Deck*);
 void loadMode(Player palyers[NPLAYERS], const int, Deck*);
-void startGame(Player players[NPLAYERS], Deck *deckCards, int nRound);
+void startGame(Player players[NPLAYERS], Deck *deckCards, int nRound, int currentPlayer, _Bool attackNext);
 
 #endif // FUNCTIONS_H_

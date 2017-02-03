@@ -1,0 +1,7 @@
+Il turno è del giocatore 3 (Riccardo).
+Nel mazzo ci sono 14 carte.
+
+Alessandro è fuori dal gioco
+Fabio ha 7 carte
+Giammi ha 4 carte
+Riccardo ha 6 carte

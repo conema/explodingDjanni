@@ -24,6 +24,9 @@
 //Directory contenente i txt delle modalita'
 #define DIRMODES "modes/"
 
+//Directory contenete i salvataggi
+#define DIRSAVES "saves/"
+
 //http://www.linuxjournal.com/article/8603
 #define COLOR_RED     "\x1b[31m"
 #define COLOR_RED_BLINK "\033[5;31;3m"

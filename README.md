@@ -6,13 +6,14 @@
 - Shuffle cards: ok
 - Give cards: ok
 - moveCard function: ok
+- Loading game from file: ok
+- Game: ok
 
 ##Ongoing:
-- Game
+
 
 
 ##To-do:
-- Loading game
 - Saving game
 - NPC
 - Logger

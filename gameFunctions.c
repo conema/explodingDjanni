@@ -227,7 +227,7 @@ Deck* isExplosive(Player* player, Deck* deckCards){
 
 //Controllo dell'effetto speciale della carta
 void cardEffect(Deck *deckCards, Player players[NPLAYERS], const Card card, const int currentPlayer, int *special){
-	int i, scPlayer = 0, scCard = 0, countDjanni = 0, nDjanni;
+	int i, scPlayer = 0, scCard = 0, countDjanni = 1, nDjanni;
 	char sc;
 	Deck *tempDeck = deckCards;
 	Card tempCard;
@@ -283,21 +283,21 @@ void cardEffect(Deck *deckCards, Player players[NPLAYERS], const Card card, cons
 				addCardPlayer(&players[currentPlayer], tempCard);
 			}else if(card.cardType == DJANNICARD){
 				for(i = 0; i < players[currentPlayer].nCards; i++){
-					if(i != sc && !strcmp(card.description, players[currentPlayer].cards[i].description)){
+					if(!strcmp(card.description, players[currentPlayer].cards[i].description)){
 						countDjanni++;
 					}
 				}
 
-				if(countDjanni >= 1){
-					if(countDjanni > 2){
-						countDjanni = 2;
+				if(countDjanni >= 2){
+					if(countDjanni > 3){
+						countDjanni = 3;
 					}
 
 					nDjanni = countDjanni;
 
 					do{
 						getchar();
-						printf("Sono state trovate %i %s uguali, vuoi giocarle insieme? (y o n)\n", countDjanni+1, card.description);
+						printf("Sono state trovate %i %s uguali, vuoi giocarle insieme? (y o n)\n", countDjanni, card.description);
 						scanf("%c", &sc);
 					}while(!(sc == 'y' || sc == 'n'));
 

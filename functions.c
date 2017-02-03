@@ -76,7 +76,7 @@ void menu(Player players[NPLAYERS], Deck *deckCards){
                newGame(players, deckCards);
                break;
         case 2:
-               //loadGame();
+               loadGame(players, deckCards);
                break;
         case 3:
                //credits();
@@ -130,6 +130,70 @@ void newGame(Player players[NPLAYERS], Deck *deckCards){
     }
 
     loadMode(players, sc, deckCards);
+}
+
+void loadGame(Player players[NPLAYERS], Deck *deckCards){
+    char dir[STRLEN] = DIRSAVES;
+    char fileName[NAMELEN];
+    int i = 0, j;
+    int nCardDeck, currentPlayer;
+    Card tempCard;
+    _Bool attackNext;
+
+    printf("Insersci il nome del tuo salvataggio:\n");
+
+    #ifdef _WIN32 
+        system("dir " DIRSAVES); 
+    #endif 
+    #ifdef linux 
+        system("ls " DIRSAVES); 
+    #endif 
+    #ifdef __APPLE__
+        system("ls " DIRSAVES); 
+    #endif
+
+    scanf("%23s", fileName);
+
+    strcat(dir, fileName);
+
+    FILE * fp = fopen(dir, "r");
+
+    if(fp == NULL){
+        printf("File non esistente.\n");
+        exit(-1);
+    }
+
+    //Lettura dati giocatori
+    for(i = 0; i < NPLAYERS; i++){
+        fread(players[i].name, sizeof(char), NAMELEN, fp);
+        fread(&players[i].alive, sizeof(_Bool), 1, fp);
+
+        if(players[i].alive){
+            fread(&players[i].nCards, sizeof(int), 1, fp);
+            fread(&players[i].playerType, sizeof(PlayerType), 1, fp);
+
+            players[i].cards = (Card*)malloc(sizeof(Card) * players[i].nCards); //Allocamento memoria carte
+            for(j = 0; j < players[i].nCards; j++){
+                fread(&players[i].cards[j].description, sizeof(char), STRLEN, fp);
+                fread(&players[i].cards[j].cardType, sizeof(CardType), 1, fp);
+            }
+        }
+    }
+
+    fread(&nCardDeck, sizeof(int), 1, fp);
+
+    for(i = 0; i < nCardDeck; i++){
+        fread(&tempCard.description, sizeof(char), STRLEN, fp);
+        fread(&tempCard.cardType, sizeof(CardType), 1, fp);
+        deckCards = insertHead(deckCards, tempCard);
+    }
+
+    fread(&currentPlayer, sizeof(int), 1, fp);
+    fread(&attackNext, sizeof(_Bool), 1, fp);
+
+    fclose(fp);
+
+    startGame(players, deckCards, 0, currentPlayer, attackNext);
 }
 
 //Caricamento modalità da file
@@ -223,15 +287,12 @@ void loadMode(Player players[NPLAYERS], const int mode, Deck *deckCards){
         //printList(deckCards);
     #endif
 
-    startGame(players, deckCards, nRound);
+    startGame(players, deckCards, nRound, (rand() % NPLAYERS), false);
 }
 
-void startGame(Player players[NPLAYERS], Deck *deckCards, int nRound){
-    int currentPlayer, sc, playersAlive, special = 0;
-    _Bool playing = true, attackNext = false;
-
-    //Scelta casuale primo giocatore
-    currentPlayer = rand() % NPLAYERS;
+void startGame(Player players[NPLAYERS], Deck *deckCards, int nRound, int currentPlayer, _Bool attackNext){
+    int sc, playersAlive, special = 0;
+    _Bool playing = true;
 
     getchar();
     printf(COLOR_WHITE_BLINK "\nCaricamento file di gioco completato, premi invio per iniziare a giocare." COLOR_RESET);
