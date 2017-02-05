@@ -56,8 +56,47 @@ void checkNumber(int *n){
     }
 }
 
+//Scrittura riga a log
+void newLogPlayer(Player player1, Player player2, Card card, const int nRound, Log log){
+    char type[][16] = {"EXPLODINGDJANNI", "MEOOOW", "SHUFFLE", "NOPE", "SEETHEFUTURE", "ATTACK", "SKIP", "FAVOR", "DJANNICARD"};  
+    FILE *fp = fopen (LOGNAME, "a+");
+
+    fprintf(fp, "Turno %i: ", nRound);
+    if(log == DRAW){
+        if(card.cardType == DJANNICARD){
+            fprintf(fp, "%s ha pescato %s\n", player1.name, card.description);
+        }else{
+            fprintf(fp, "%s ha pescato %s\n", player1.name, type[card.cardType]);
+        }
+    }else if(log == DEATH){
+        fprintf(fp, "%s e' esploso\n", player1.name);
+    }else if(log == CHOOSE){
+        if(card.cardType == DJANNICARD){
+            fprintf(fp, "%s ha giocato %s\n", player1.name, card.description);
+        }else{
+            fprintf(fp, "%s ha giocato %s\n", player1.name, type[card.cardType]);
+        }
+    }else if(log == NOP){
+        fprintf(fp, "%s ha annullato la carta\n", player1.name);
+    }else if(log == FAV){
+        if(card.cardType == DJANNICARD){
+            fprintf(fp, "%s ha dato una carta %s a %s\n", player2.name, card.description, player1.name);
+        }else{
+            fprintf(fp, "%s ha dato una carta %s a %s\n", player2.name, type[card.cardType], player1.name);
+        }
+    }else if(log == DJSTOLE){
+        if(card.cardType == DJANNICARD){
+            fprintf(fp, "%s ha rubato la carta %s a %s\n", player1.name, card.description, player2.name);
+        }else{
+            fprintf(fp, "%s ha rubato la carta %s a %s\n", player1.name, type[card.cardType], player2.name);
+        }
+    }
+
+    fclose(fp);
+}
+
 //Menù iniziale
-void menu(Player players[NPLAYERS], Deck *deckCards){
+int menu(){
     int sc = 0;
     do{
         printf(
@@ -70,22 +109,11 @@ void menu(Player players[NPLAYERS], Deck *deckCards){
         checkNumber(&sc);
     }while(!(sc >= FIRSTCHOICE && sc <= LASTCHOICE));
 
-
-    switch(sc){
-        case 1:
-               newGame(players, deckCards);
-               break;
-        case 2:
-               loadGame(players, deckCards);
-               break;
-        case 3:
-               //credits();
-               break;
-    }
+    return sc;
 }
 
 //Inizio nuova partita
-void newGame(Player players[NPLAYERS], Deck *deckCards){
+void newGame(Player players[NPLAYERS]){
     int sc = 0;
     int i;
     char scc;
@@ -128,17 +156,15 @@ void newGame(Player players[NPLAYERS], Deck *deckCards){
         players[i].alive = true;
         players[i].nCards = 0;
     }
-
-    loadMode(players, sc, deckCards);
 }
 
-void loadGame(Player players[NPLAYERS], Deck *deckCards){
+//Caricamento partita
+Deck* loadGame(Player players[NPLAYERS], Deck *deckCards, _Bool *attackNext, int *currentPlayer){
     char dir[STRLEN] = DIRSAVES;
     char fileName[NAMELEN];
     int i = 0, j;
-    int nCardDeck, currentPlayer;
+    int nCardDeck;
     Card tempCard;
-    _Bool attackNext;
 
     printf("Insersci il nome del tuo salvataggio:\n");
 
@@ -156,7 +182,7 @@ void loadGame(Player players[NPLAYERS], Deck *deckCards){
 
     strcat(dir, fileName);
 
-    FILE * fp = fopen(dir, "r");
+    FILE * fp = fopen(dir, "rb");
 
     if(fp == NULL){
         printf("File non esistente.\n");
@@ -188,21 +214,81 @@ void loadGame(Player players[NPLAYERS], Deck *deckCards){
         deckCards = insertHead(deckCards, tempCard);
     }
 
-    fread(&currentPlayer, sizeof(int), 1, fp);
-    fread(&attackNext, sizeof(_Bool), 1, fp);
+    fread(currentPlayer, sizeof(int), 1, fp);
+    fread(attackNext, sizeof(_Bool), 1, fp);
 
     fclose(fp);
 
-    startGame(players, deckCards, 0, currentPlayer, attackNext);
+    return deckCards;
+}
+
+//Salvataggio partita
+void saveGame(Player players[NPLAYERS], Deck *deckCards, int currentPlayer, _Bool attackNext){
+    char dir[STRLEN] = DIRSAVES;
+    char fileName[NAMELEN];
+    int nCardDeck = listDimension(deckCards);
+    int i = 0, j;
+    Deck *tempDeck = deckCards;
+
+    printf("Insersci il nome del tuo salvataggio:\n Salvataggi presenti:\n");
+
+    #ifdef _WIN32 
+        system("dir " DIRSAVES); 
+    #endif 
+    #ifdef linux 
+        system("ls " DIRSAVES); 
+    #endif 
+    #ifdef __APPLE__
+        system("ls " DIRSAVES); 
+    #endif
+
+    scanf("%23s", fileName);
+
+    strcat(dir, fileName);
+
+    FILE * fp = fopen(dir, "wb");
+
+    if(fp == NULL){
+        exit(-1);
+    }
+
+    //Scrittura dati giocatori
+    for(i = 0; i < NPLAYERS; i++){
+        fwrite(players[i].name, sizeof(char), NAMELEN, fp);
+        fwrite(&players[i].alive, sizeof(_Bool), 1, fp);
+
+        if(players[i].alive){
+            fwrite(&players[i].nCards, sizeof(int), 1, fp);
+            fwrite(&players[i].playerType, sizeof(PlayerType), 1, fp);
+
+            for(j = 0; j < players[i].nCards; j++){
+                fwrite(&players[i].cards[j].description, sizeof(char), STRLEN, fp);
+                fwrite(&players[i].cards[j].cardType, sizeof(CardType), 1, fp);
+            }
+        }
+    }
+
+    fwrite(&nCardDeck, sizeof(int), 1, fp);
+
+    for(i = 0; i < nCardDeck; i++){
+        fwrite(tempDeck->card.description, sizeof(char), STRLEN, fp);
+        fwrite(&tempDeck->card.cardType, sizeof(CardType), 1, fp);
+        tempDeck = tempDeck->next;
+    }
+
+    fwrite(&currentPlayer, sizeof(int), 1, fp);
+    fwrite(&attackNext, sizeof(_Bool), 1, fp);
+
+    fclose(fp);
 }
 
 //Caricamento modalità da file
-void loadMode(Player players[NPLAYERS], const int mode, Deck *deckCards){
+Deck* loadMode(Player players[NPLAYERS], Deck *deckCards, const int nRound, const int mode){
     FILE *fp = NULL;
-    int totCards = 0, countExplosiveCards = 0, countMeowCards = 0, i;
+    int totCards = 0, countExplosiveCards = 0, countMeowCards = 0, i, j;
     int nExplosive, nMeow, nDjanni, cardType;
-    int nRound = 0;
     char description[STRLEN];
+    char type[][16] = {"EXPLODINGDJANNI", "MEOOOW", "SHUFFLE", "NOPE", "SEETHEFUTURE", "ATTACK", "SKIP", "FAVOR", "DJANNICARD"};    
     Card *explosiveCards, *meowCards;
     Card newCard;
 
@@ -287,7 +373,26 @@ void loadMode(Player players[NPLAYERS], const int mode, Deck *deckCards){
         //printList(deckCards);
     #endif
 
-    startGame(players, deckCards, nRound, (rand() % NPLAYERS), false);
+    //Inserimento carte utenti nel log
+    fp = fopen (LOGNAME, "a+");
+
+    fprintf(fp, "Turno %i: le carte sono state assegnate\n", nRound);
+
+    for(i = 0; i < NPLAYERS; i++){
+        fprintf(fp, "Turno %i: %s ha le seguenti carte: ", nRound, players[i].name);
+        for(j = 0; j < players[i].nCards; j++){
+            if(players[i].cards[j].cardType == DJANNICARD){
+                fprintf(fp, "%s/", players[i].cards[j].description);
+            }else{
+                fprintf(fp, "%s/", type[players[i].cards[j].cardType]);
+            }
+        }
+        fprintf(fp, "\n"); 
+    }
+
+    fclose(fp);
+
+    return deckCards;
 }
 
 void startGame(Player players[NPLAYERS], Deck *deckCards, int nRound, int currentPlayer, _Bool attackNext){
@@ -299,10 +404,11 @@ void startGame(Player players[NPLAYERS], Deck *deckCards, int nRound, int curren
     getchar();
 
     while(playing){
-        if(currentPlayer >= 4){
+        if(currentPlayer >= NPLAYERS){
             //Reset turno giocatore
             currentPlayer = 0;
         }
+
 
         playersAlive = countAlive(players);
 
@@ -313,12 +419,17 @@ void startGame(Player players[NPLAYERS], Deck *deckCards, int nRound, int curren
                 printf("\nTurno: %i, tocca a %s\nLe tue carte:\n", nRound,players[currentPlayer].name);
                 printDeck(players[currentPlayer].cards, players[currentPlayer].nCards);
 
+                if(attackNext){
+                    printf("Attenzione, sei sotto attacco.\n");
+                }
+
 		        printf("\n(0) Gioca carta\n(1) Pesca carta\n(2) Salva la partita\n");
 		        checkNumber(&sc);
 
                 if(sc == 0){
-                    chooseCard(deckCards, players, currentPlayer, &special);
+                    chooseCard(deckCards, players, currentPlayer, &special, nRound);
 	            }else if(sc == 2){
+                    saveGame(players, deckCards, currentPlayer, attackNext);
 			        printf("Partita salvata\n");
 		        }
 
@@ -334,11 +445,15 @@ void startGame(Player players[NPLAYERS], Deck *deckCards, int nRound, int curren
             clearConsole();
             playing = false;
             printf("\n\nComplimenti %s, hai vinto la partita!\n\n", players[currentPlayer].name);
+            
+            FILE *fp = fopen (LOGNAME, "a+");
+            fprintf(fp, "Turno %i: %s ha vinto\n", nRound, players[currentPlayer].name);
+            fclose(fp);
         }
         
         if(players[currentPlayer].alive == true && playersAlive > 1){
             if(sc == 1 && special != SKIP && special != ATTACK){
-                deckCards = drawCard(&players[currentPlayer], deckCards);
+                deckCards = drawCard(&players[currentPlayer], deckCards, nRound);
             }
 
             if(special == ATTACK && attackNext == false){
@@ -349,9 +464,9 @@ void startGame(Player players[NPLAYERS], Deck *deckCards, int nRound, int curren
             }
 
             special = 0;
+            nRound++;
         }
 
-        nRound++;
         currentPlayer++;
     }
 }

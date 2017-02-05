@@ -24,8 +24,11 @@
 //Directory contenente i txt delle modalita'
 #define DIRMODES "modes/"
 
-//Directory contenete i salvataggi
+//Directory contenente i salvataggi
 #define DIRSAVES "saves/"
+
+//Nome log
+#define LOGNAME "log.txt"
 
 //http://www.linuxjournal.com/article/8603
 #define COLOR_RED     "\x1b[31m"
@@ -39,6 +42,7 @@
 #define COLOR_WHITE_BLINK "\033[5;37;3m"
 #define COLOR_BROWN    "\033[01;30m"
 #define COLOR_RESET   "\x1b[0m"
+
 
 
 #endif // COMMONS_H_

@@ -15,11 +15,11 @@ int countAlive(const Player players[NPLAYERS]);
 void printAlive(const Player players[NPLAYERS], const int currentPlayer);
 Card removeCardPlayer(Player* player, const int pos);
 void addCardPlayer(Player* player, Card card);
-void chooseCard(Deck *deckCards, Player players[NPLAYERS], const int currentPlayer, int *special);
-Deck* drawCard(Player* player, Deck* deckCards);
-Deck* isExplosive(Player* player, Deck* deckCards);
-void cardEffect(Deck *deckCards, Player players[NPLAYERS], const Card card, const int currentPlayer, int *special);
-_Bool callNope(Player players[NPLAYERS], const int currentPlayer, const Card card);
-void specialDjanni(Player player[NPLAYERS], const int currentPlayer , const int nDjanni);
+void chooseCard(Deck *deckCards, Player players[NPLAYERS], const int currentPlayer, int *special, const int nRound);
+Deck* drawCard(Player* player, Deck* deckCards, const int nRound);
+Deck* isExplosive(Player* player, Deck* deckCards, const int nRound);
+void cardEffect(Deck *deckCards, Player players[NPLAYERS], const Card card, const int currentPlayer, int *special, const int nRound);
+_Bool callNope(Player players[NPLAYERS], const int currentPlayer, const Card card, const int nRound);
+void specialDjanni(Player player[NPLAYERS], const int currentPlayer , const int nDjanni, const int nRound);
 
 #endif // GAME_FUNCTIONS_H_

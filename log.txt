@@ -1,0 +1,20 @@
+Turno 0: le carte sono state assegnate
+Turno 0: hR;Aý ha le seguenti carte: SEETHEFUTURE/DJANNI MIAGOLANTE/DJANNI MIAGOLANTE/SEETHEFUTURE/MEOOOW/
+Turno 0: Ø,:Aý ha le seguenti carte: DJANNI DORMIENTE/NOPE/NOPE/DJANNI SOCIAL/MEOOOW/
+Turno 0:  ha le seguenti carte: ATTACK/FAVOR/SKIP/SHUFFLE/MEOOOW/
+Turno 0:  ha le seguenti carte: DJANNI SOCIAL/NOPE/DJANNI GRASSO/SHUFFLE/MEOOOW/
+Turno 0:  ha giocato ATTACK
+Turno 0: Ø,:Aý ha annullato la carta
+Turno 0:  ha giocato FAVOR
+Turno 0: Ø,:Aý ha dato una carta DJANNI DORMIENTE a 
+Turno 0:  ha giocato SKIP
+Turno 1:  ha giocato SHUFFLE
+Turno 1:  ha pescato DJANNI DORMIENTE
+Turno 2: hR;Aý ha pescato DJANNI GRASSO
+Turno 0: Ø,:Aý ha pescato NOPE
+Turno 1:  ha pescato MEOOOW
+Turno 2:  ha pescato ATTACK
+Turno 3: hR;Aý ha pescato DJANNI AFFAMATO
+Turno 4: Ø,:Aý ha pescato SEETHEFUTURE
+Turno 5:  ha pescato NOPE
+Turno 6:  ha pescato MEOOOW

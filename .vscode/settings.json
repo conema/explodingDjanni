@@ -11,6 +11,9 @@
 		"*h*h*h*h*h*h*h*h*h*h*h*h*h*h*h*h*h*h*h*htuple": "cpp",
 		"array": "cpp",
 		"*h*h*h*h*h*h*h*hfunctional": "cpp",
-		"functional": "cpp"
+		"functional": "cpp",
+		"*h*h*h*h*h*h*h*h*h*hsystem_error": "cpp",
+		"system_error": "cpp",
+		"cmath": "cpp"
 	}
 }

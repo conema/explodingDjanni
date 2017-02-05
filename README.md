@@ -8,12 +8,13 @@
 - moveCard function: ok
 - Loading game from file: ok
 - Game: ok
+- Save game: ok
+- Logger: ok
 
 ##Ongoing:
+- Code re-styling
 
 
 
 ##To-do:
-- Saving game
 - NPC
-- Logger
