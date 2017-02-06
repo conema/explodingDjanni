@@ -9,7 +9,7 @@
 #include <time.h>
 
 /*		DEFINE     */
-#define DEBUG 1
+#define DEBUG 0
 #define NPLAYERS 4
 #define CARDSFORPLAYER 4
 

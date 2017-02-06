@@ -10,6 +10,7 @@
 - Game: ok
 - Save game: ok
 - Logger: ok
+- NPC: ok
 
 ##Ongoing:
 - Code re-styling
@@ -17,4 +18,3 @@
 
 
 ##To-do:
-- NPC

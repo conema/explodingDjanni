@@ -1,6 +1,6 @@
 #include "listFunctions.h"
 
-//Inserimento nuovo nodo in testa
+/* Inserimento nuovo nodo in testa */
 Deck* insertHead(Deck *first, Card card){
   Deck *nuovoNodo = (Deck*) malloc(sizeof(Deck));
   nuovoNodo->card = card;
@@ -9,7 +9,7 @@ Deck* insertHead(Deck *first, Card card){
   return nuovoNodo;
 }
 
-//Spostamento carta
+/* Spostamento carta */
 Deck* moveCard(Deck *first, const int from, const int to){
   Deck *current = first, *next = first->next, *prev = NULL, *fromCard, *toCard;
   int i;
@@ -51,7 +51,7 @@ Deck* moveCard(Deck *first, const int from, const int to){
   return first;
 }
 
-//Dimensione totale lista
+/* Dimensione totale lista */
 int listDimension(Deck *first){
 	if(first == NULL){
     	return 0;
@@ -60,6 +60,7 @@ int listDimension(Deck *first){
   	return listDimension(first->next) + 1;
 }
 
+/* Stampa lista */
 void printList(Deck *first){
   if(first == NULL){
     return;
@@ -69,6 +70,7 @@ void printList(Deck *first){
   printList(first->next);
 }
 
+/* Cancella carta in testa */
 Deck* deleteHead(Deck *first){
   if(first != NULL){
     Deck *tempNodo = first;

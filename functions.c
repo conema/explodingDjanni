@@ -1,7 +1,7 @@
 #include "functions.h"
 
 
-//Gestione degli argomenti
+/* Gestione degli argomenti */
 void inlineHelper(const int argc, char** argv){
     if(argc >= 2){
         if(!strcmp("-help", argv[1])){
@@ -13,7 +13,7 @@ void inlineHelper(const int argc, char** argv){
     }
 }
 
-//Introduzione al gioco
+/* Introduzione al gioco */
 void intro(){
     printf(             
 "             _.-^^---....,,--\n" 
@@ -34,7 +34,7 @@ void intro(){
 "Benvenuto, buona partita ad Exploding Djanni\n");
 }
 
-//Pulizia console
+/* Pulizia console */
 void clearConsole(){
     #ifdef _WIN32 
         system("cls"); 
@@ -47,7 +47,7 @@ void clearConsole(){
     #endif
 }
 
-//Controllo input numerico
+/* Controllo input numerico */
 void checkNumber(int *n){
     //Controllo input numerico
     if(!scanf("%i", n)){
@@ -56,7 +56,7 @@ void checkNumber(int *n){
     }
 }
 
-//Scrittura riga a log
+/* Scrittura riga a log */
 void newLogPlayer(Player player1, Player player2, Card card, const int nRound, Log log){
     char type[][16] = {"EXPLODINGDJANNI", "MEOOOW", "SHUFFLE", "NOPE", "SEETHEFUTURE", "ATTACK", "SKIP", "FAVOR", "DJANNICARD"};  
     FILE *fp = fopen (LOGNAME, "a+");
@@ -90,12 +90,14 @@ void newLogPlayer(Player player1, Player player2, Card card, const int nRound, L
         }else{
             fprintf(fp, "%s ha rubato la carta %s a %s\n", player1.name, type[card.cardType], player2.name);
         }
+    }else if(log == MEOW){
+        fprintf(fp, "%s si e' salvato con una meow\n", player1.name);
     }
 
     fclose(fp);
 }
 
-//Menù iniziale
+/*Menù iniziale */
 int menu(){
     int sc = 0;
     do{
@@ -112,7 +114,7 @@ int menu(){
     return sc;
 }
 
-//Inizio nuova partita
+/* Inizio nuova partita */
 void newGame(Player players[NPLAYERS]){
     int sc = 0;
     int i;
@@ -133,8 +135,9 @@ void newGame(Player players[NPLAYERS]){
 
     for(i = 0; i < NPLAYERS; i++){
         #if (DEBUG != 1)
+        getchar();
         printf("Giocatore %i:\n Nome: ", i+1);
-        scanf("%23s", players[i].name);
+        scanf("%23[^\n]s", players[i].name);
         getchar();
         do{
             printf("Il giocatore e' un NPC? (y o n)\n");
@@ -150,7 +153,7 @@ void newGame(Player players[NPLAYERS]){
         #endif
 
         #if (DEBUG == 1)
-        players[i].playerType = HUMAN;
+        players[i].playerType = NPC;
         #endif
 
         players[i].alive = true;
@@ -158,7 +161,7 @@ void newGame(Player players[NPLAYERS]){
     }
 }
 
-//Caricamento partita
+/* Caricamento partita */
 Deck* loadGame(Player players[NPLAYERS], Deck *deckCards, _Bool *attackNext, int *currentPlayer){
     char dir[STRLEN] = DIRSAVES;
     char fileName[NAMELEN];
@@ -178,7 +181,8 @@ Deck* loadGame(Player players[NPLAYERS], Deck *deckCards, _Bool *attackNext, int
         system("ls " DIRSAVES); 
     #endif
 
-    scanf("%23s", fileName);
+    getchar();
+    scanf("%23[^\n]s", fileName);
 
     strcat(dir, fileName);
 
@@ -222,7 +226,7 @@ Deck* loadGame(Player players[NPLAYERS], Deck *deckCards, _Bool *attackNext, int
     return deckCards;
 }
 
-//Salvataggio partita
+/* Salvataggio partita */
 void saveGame(Player players[NPLAYERS], Deck *deckCards, int currentPlayer, _Bool attackNext){
     char dir[STRLEN] = DIRSAVES;
     char fileName[NAMELEN];
@@ -242,7 +246,8 @@ void saveGame(Player players[NPLAYERS], Deck *deckCards, int currentPlayer, _Boo
         system("ls " DIRSAVES); 
     #endif
 
-    scanf("%23s", fileName);
+    getchar();
+    scanf("%23[^\n]s", fileName);
 
     strcat(dir, fileName);
 
@@ -282,7 +287,7 @@ void saveGame(Player players[NPLAYERS], Deck *deckCards, int currentPlayer, _Boo
     fclose(fp);
 }
 
-//Caricamento modalità da file
+/* Caricamento modalità da file */
 Deck* loadMode(Player players[NPLAYERS], Deck *deckCards, const int nRound, const int mode){
     FILE *fp = NULL;
     int totCards = 0, countExplosiveCards = 0, countMeowCards = 0, i, j;
@@ -395,8 +400,9 @@ Deck* loadMode(Player players[NPLAYERS], Deck *deckCards, const int nRound, cons
     return deckCards;
 }
 
+/* Inizio partita */
 void startGame(Player players[NPLAYERS], Deck *deckCards, int nRound, int currentPlayer, _Bool attackNext){
-    int sc, playersAlive, special = 0;
+    int sc, scCard, playersAlive, special = 0;
     _Bool playing = true;
 
     getchar();
@@ -409,7 +415,6 @@ void startGame(Player players[NPLAYERS], Deck *deckCards, int nRound, int curren
             currentPlayer = 0;
         }
 
-
         playersAlive = countAlive(players);
 
         if(players[currentPlayer].alive == true && players[currentPlayer].playerType == HUMAN && playersAlive > 1){
@@ -420,14 +425,27 @@ void startGame(Player players[NPLAYERS], Deck *deckCards, int nRound, int curren
                 printDeck(players[currentPlayer].cards, players[currentPlayer].nCards);
 
                 if(attackNext){
-                    printf("Attenzione, sei sotto attacco.\n");
+                    printf(COLOR_RED "\nAttenzione, sei sotto attacco.\n" COLOR_RESET);
                 }
 
 		        printf("\n(0) Gioca carta\n(1) Pesca carta\n(2) Salva la partita\n");
 		        checkNumber(&sc);
 
                 if(sc == 0){
-                    chooseCard(deckCards, players, currentPlayer, &special, nRound);
+                    if(players[currentPlayer].nCards != 0){
+		                do{
+			                printf("Inserisci il numero della carta che vuoi giocare: (-1 per tornare indietro)\n");
+			                checkNumber(&scCard);
+
+			                if(sc == -1){
+				                return;
+			                }
+
+		                }while(scCard < 0 || scCard >= players[currentPlayer].nCards);
+                        chooseCard(deckCards, players, currentPlayer, &special, nRound, scCard);
+	                }else{
+		                printf("Non hai più carte in mano.\n");
+	                }
 	            }else if(sc == 2){
                     saveGame(players, deckCards, currentPlayer, attackNext);
 			        printf("Partita salvata\n");
@@ -437,11 +455,12 @@ void startGame(Player players[NPLAYERS], Deck *deckCards, int nRound, int curren
                 printf("\nPremi invio per continuare.\n");
                 getchar();
 	        }while(sc != 1 && special == 0); 
-        }else if(players[currentPlayer].alive == true && players[currentPlayer].playerType == NPC){
-
+        }else if(players[currentPlayer].alive == true && players[currentPlayer].playerType == NPC && playersAlive > 1){
+            while(chooseCardBot(players, deckCards, currentPlayer, &special, nRound, attackNext) && special == 0);
+            sc = 1;
         }
         
-        if(players[currentPlayer].alive == true && players[currentPlayer].playerType == HUMAN && playersAlive == 1){
+        if(players[currentPlayer].alive == true && playersAlive == 1){
             clearConsole();
             playing = false;
             printf("\n\nComplimenti %s, hai vinto la partita!\n\n", players[currentPlayer].name);

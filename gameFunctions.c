@@ -1,6 +1,6 @@
 #include "gameFunctions.h"
 
-//Funzione mischia carte
+/* Funzione mischia carte */
 void shuffleDeck(Deck *deckCards){
 	int i, nRand, size;
 	Card temp;
@@ -41,7 +41,7 @@ void shuffleDeck(Deck *deckCards){
 }
 
 
-//Stampa le carte
+/* Stampa le carte */
 void printDeck(Card *cards, const int size){
 	int i;
 	for(i = 0; i < size; i++){
@@ -50,7 +50,7 @@ void printDeck(Card *cards, const int size){
 	}
 }
 
-//Distribuisce le carte
+/* Distribuisce le carte */
 Deck* giveCards(Player* players, Deck *deckCards, Card * meowCards, int *nMeow){
 	int i, j;
 	Deck *temp = deckCards;
@@ -75,19 +75,31 @@ Deck* giveCards(Player* players, Deck *deckCards, Card * meowCards, int *nMeow){
 	return temp;
 }
 
-//Stampa la carta
+/* Stampa la carta */
 void printCard(Card card){
 	printType(card);
 	printf(" \n    %s\n", card.description);
 }
 
-//Stampa tipo carta
+/* Stampa tipo carta */
 void printType(Card card){
 	char type[][16] = {"EXPLODINGDJANNI", "MEOOOW", "SHUFFLE", "NOPE", "SEETHEFUTURE", "ATTACK", "SKIP", "FAVOR", "DJANNICARD"};
 	printf("%s", type[card.cardType]);
 }
 
-//Conta giocatori vuoti
+/* Restituisce la posizione di una carta, -1 altrimenti */
+int searchCard(Player player, CardType cardType){
+	int i;
+
+	for(i = 0; i < player.nCards; i++){
+		if(player.cards[i].cardType == cardType){
+			return i;
+		}
+	}
+	return -1;
+}
+
+/* Conta giocatori vuoti */
 int countAlive(const Player players[NPLAYERS]){
 	int i, cont = 0;
 	for(i = 0; i < NPLAYERS; i++){
@@ -98,7 +110,7 @@ int countAlive(const Player players[NPLAYERS]){
 	return cont;
 }
 
-//Stampa i nomi dei giocatori in vita
+/* Stampa i nomi dei giocatori in vita */
 void printAlive(const Player players[NPLAYERS], const int currentPlayer){
 	int i;
 	for(i = 0; i < NPLAYERS; i++){
@@ -108,59 +120,42 @@ void printAlive(const Player players[NPLAYERS], const int currentPlayer){
 	}
 }
 
-//Elimina la carta del giocatore
+/* Elimina la carta del giocatore */
 Card removeCardPlayer(Player* player, const int pos){
 	Card tempCard, deletedCard;
-	int nCards = --(*player).nCards;
+	int nCards = --player->nCards;
 
-	deletedCard = (*player).cards[pos];
+	deletedCard = player->cards[pos];
 
 	//La carta da eliminare è spostata alla fine del mazzo
-	tempCard = (*player).cards[nCards];
-	(*player).cards[nCards] = (*player).cards[pos];
-	(*player).cards[pos] = tempCard;
+	tempCard = player->cards[nCards];
+	player->cards[nCards] = player->cards[pos];
+	player->cards[pos] = tempCard;
 
 	//Re-allocazione della memoria
-	(*player).cards = (Card*)realloc((*player).cards, nCards * sizeof(Card));
+	player->cards = (Card*)realloc(player->cards, nCards * sizeof(Card));
 
 	return deletedCard;
 }
 
-//Aggiungere carta al mazzo del giocatore
+/* Aggiungere carta al mazzo del giocatore */
 void addCardPlayer(Player* player, Card card){
-	int nCards = ++(*player).nCards;
+	int nCards = ++player->nCards;
 
 	//Re-allocazione della memoria
-	player->cards = (Card*)realloc((*player).cards, nCards * sizeof(Card));
+	player->cards = (Card*)realloc(player->cards, nCards * sizeof(Card));
 
 	//La carta viene aggiunta
 	player->cards[nCards-1] = card;
 }
 
-//Gioca una carta
-void chooseCard(Deck *deckCards, Player players[NPLAYERS], const int currentPlayer, int *special, const int nRound){
-	int sc;
-	int nCards = players[currentPlayer].nCards;
-
-	if(nCards != 0){
-		do{
-			printf("Inserisci il numero della carta che vuoi giocare: (-1 per tornare indietro)\n");
-			checkNumber(&sc);
-
-			if(sc == -1){
-				return;
-			}
-
-		}while(sc < 0 || sc >= nCards);
-
-		newLogPlayer(players[currentPlayer], players[currentPlayer], players[currentPlayer].cards[sc], nRound, CHOOSE);
-		cardEffect(deckCards, players, removeCardPlayer(&players[currentPlayer], sc), currentPlayer, special, nRound);
-	}else{
-		printf("Non hai più carte in mano.\n");
-	}
+/* Gioca una carta */
+void chooseCard(Deck *deckCards, Player players[NPLAYERS], const int currentPlayer, int *special, const int nRound, const int sc){
+	newLogPlayer(players[currentPlayer], players[currentPlayer], players[currentPlayer].cards[sc], nRound, CHOOSE);
+	cardEffect(deckCards, players, removeCardPlayer(&players[currentPlayer], sc), currentPlayer, special, nRound);
 }
 
-//Pesca una carta
+/* Pesca una carta */
 Deck* drawCard(Player* player, Deck* deckCards, const int nRound){
 	if(deckCards == NULL){
 		printf("Il mazzo è vuoto\n");
@@ -190,6 +185,7 @@ Deck* isExplosive(Player* player, Deck* deckCards, const int nRound){
 		}
 	}
 
+	if(player->playerType != NPC){
     printf(
      "      /\\_/\\\n"
      " /\\  / o o \\\n"
@@ -200,17 +196,23 @@ Deck* isExplosive(Player* player, Deck* deckCards, const int nRound){
      "    \\)__H_,,__        (__((___()\n"    
      "      |ACME |\\\\______(__((___()()\n"								                     
      "      |_____| '-----(__((___()()()\n");
+	}
 
 	if(meow == true){
-		do{
-			printf("\nAttenzione! Potresti morire, vuoi usare la tua carta meooow? (y o n)\n");
-			scanf("%c", &sc);
-		}while(sc != 'y' && sc != 'n');
-		getchar();
-		if(sc == 'y'){
+		if(player->playerType != NPC){
+			do{
+				printf("\nAttenzione! Potresti morire, vuoi usare la tua carta meooow? (y o n)\n");
+				scanf("%c", &sc);
+			}while(sc != 'y' && sc != 'n');
+			getchar();
+		}
+
+		if(sc == 'y' || player->playerType == NPC){
 			//Spostamento casuale carta explosion
 			nRand = rand()%(listDimension(deckCards));
 			deckCards = moveCard(deckCards, 0, nRand);
+
+			newLogPlayer(*player, *player, player->cards[meowPos], nRound, MEOW);
 
 			//Rimozione carta meow del giocatore
 			removeCardPlayer(player, meowPos);
@@ -219,7 +221,7 @@ Deck* isExplosive(Player* player, Deck* deckCards, const int nRound){
 			printf("Hai deciso di morire... Sadico...\nPremi invio per continuare\n");
 		}
 	}else{
-		printf("Sei morto!\nPremi invio per continuare\n");
+		printf("%s e' morto!\nPremi invio per continuare\n", player->name);
 	}
 
 	getchar();
@@ -233,7 +235,7 @@ Deck* isExplosive(Player* player, Deck* deckCards, const int nRound){
 	return deckCards;
 }
 
-//Controllo dell'effetto speciale della carta
+/* Controllo dell'effetto speciale della carta  */
 void cardEffect(Deck *deckCards, Player players[NPLAYERS], const Card card, const int currentPlayer, int *special, const int nRound){
 	int i, scPlayer = 0, scCard = 0, countDjanni = 1, nDjanni;
 	char sc;
@@ -267,18 +269,36 @@ void cardEffect(Deck *deckCards, Player players[NPLAYERS], const Card card, cons
 				*special = SKIP;
 			}else if(card.cardType == FAVOR){
 				clearConsole();
-				do{
-					printf("A quale giocatore vuoi chiedere il favore?\n");
-					printAlive(players, currentPlayer);
-					checkNumber(&scPlayer);
-				}while(scPlayer < 0 || scPlayer >= (NPLAYERS) || scPlayer == currentPlayer || players[scPlayer].alive == false);
 
-				do{
-					printf("%s, devi cedere una carta a %s, decidi tra le tue carte:\n", players[scPlayer].name, players[currentPlayer].name);
-					printDeck(players[scPlayer].cards, players[scPlayer].nCards);
-					printf("Che carta vuoi dare?\n");
-					checkNumber(&scCard);
-				}while(scCard < 0 || scCard > players[scPlayer].nCards);
+				if(players[currentPlayer].playerType != NPC){
+					do{
+						printf("A quale giocatore vuoi chiedere il favore?\n");
+						printAlive(players, currentPlayer);
+						checkNumber(&scPlayer);
+					}while(scPlayer < 0 || scPlayer >= (NPLAYERS) || scPlayer == currentPlayer || players[scPlayer].alive == false);
+				}else{
+					//Scelta casuale utente se NPC
+					do{
+						scPlayer = rand()%NPLAYERS;
+					}while(!players[scPlayer].alive);
+				}
+
+				if(players[scPlayer].playerType != NPC){
+					do{
+						printf("%s, devi cedere una carta a %s, decidi tra le tue carte:\n", players[scPlayer].name, players[currentPlayer].name);
+						printDeck(players[scPlayer].cards, players[scPlayer].nCards);
+						printf("Che carta vuoi dare?\n");
+						checkNumber(&scCard);
+					}while(scCard < 0 || scCard > players[scPlayer].nCards);
+				}else{
+					if(searchCard(players[currentPlayer], DJANNICARD) != -1){
+						//Se il bot ha una DJANNICARD, la cede
+						scCard = searchCard(players[currentPlayer], DJANNICARD);
+					}else{
+						//Scelta casuale carta
+						scCard = rand()%players[scPlayer].nCards;
+					}	
+				}
 
 				clearConsole();
 
@@ -336,38 +356,43 @@ void cardEffect(Deck *deckCards, Player players[NPLAYERS], const Card card, cons
 	}
 }
 
-//Controlla la presenza di NOPE e ne consente l'utilizzo
+/* Controlla la presenza di NOPE e ne consente l'utilizzo */
 _Bool callNope(Player players[NPLAYERS], const int currentPlayer, const Card card, const int nRound){
-	int i, j;
+	int i;
 	char sc;
 	Card cardTemp;
+	int nopePos;
 	for(i = 0; i < NPLAYERS; i++){
 		if(players[i].alive && i != currentPlayer){
-			for(j = 0; j < players[i].nCards; j++){
-				if(players[i].cards[j].cardType == NOPE){			
+			if(searchCard(players[i], NOPE) != -1){	
+				if(players[i].playerType != NPC){		
 					do{
 						clearConsole();
-						getchar();
+						//getchar();
             			printf("\n%s, vuoi usare la tua carta NOPE per annullare la carta ", players[i].name);
 						printType(card);
-						printf("? (y o n)\n");
+						printf(" di %s? (y o n)\n", players[currentPlayer].name);
             			scanf("%c", &sc);
         			}while(!(sc == 'y' || sc == 'n'));
-
-        			if(sc == 'y'){
-						cardTemp = players[i].cards[j];
-						newLogPlayer(players[i], players[i], cardTemp, nRound, NOP);
-						removeCardPlayer(&players[i], j);
-
-						//Viene chiesto agli altri player se vogliono annullare la nome
-						if(callNope(players, i, cardTemp, nRound)){
-							return false;
-						}else{
-							return true;
-						}
-        			}
-					break;
+				}else{
+					//Annullamento carta se e' giocata dal player precedente al bot
+					if(i == (currentPlayer+1)){
+						sc = 'y';
+					}
 				}
+
+        		if(sc == 'y'){
+					nopePos = searchCard(players[i], NOPE);
+					cardTemp = players[i].cards[nopePos];
+					newLogPlayer(players[i], players[i], cardTemp, nRound, NOP);
+					removeCardPlayer(&players[i], nopePos);
+					//Viene chiesto agli altri player se vogliono annullare la nome
+					if(callNope(players, i, cardTemp, nRound)){
+						return false;
+					}else{
+						return true;
+					}
+        		}
 			}
 		}
 	}
@@ -376,7 +401,7 @@ _Bool callNope(Player players[NPLAYERS], const int currentPlayer, const Card car
 }
 
 
-//Rimozione djanni multipli e potere speciale
+/* Rimozione djanni multipli e potere speciale */
 void specialDjanni(Player players[NPLAYERS], const int currentPlayer, const int nDjanni, const int nRound){
 	Card tempCard;
 	int scPlayer = 0, scCard = 0;
@@ -416,4 +441,26 @@ void specialDjanni(Player players[NPLAYERS], const int currentPlayer, const int 
 	printf("Hai rubato una ");
 	printType(tempCard);
 	printf(" card\n");
+}
+
+/* Scelta carta bot */
+int chooseCardBot(Player players[NPLAYERS], Deck *deckCards, const int currentPlayer, int *special, const int nRound, const _Bool attacked){
+	int prob = countAlive(players)/listDimension(deckCards)*100;	//Probabilità carta explosive
+	int continueRound = 0;
+	
+	if(attacked || prob >= 23){
+		//Se attaccato o probabilità alta
+		if(searchCard(players[currentPlayer], ATTACK) != -1){
+			//Scelta carta attack
+			chooseCard(deckCards, players, currentPlayer, special, nRound, searchCard(players[currentPlayer], ATTACK));
+		}else if(searchCard(players[currentPlayer], SKIP) != -1 ){
+			//Scelta carta skip
+			chooseCard(deckCards, players, currentPlayer, special, nRound, searchCard(players[currentPlayer], SKIP));
+		}
+	}else if(searchCard(players[currentPlayer], FAVOR) != -1){
+		chooseCard(deckCards, players, currentPlayer, special, nRound, searchCard(players[currentPlayer], FAVOR));
+		continueRound = 1;
+	}
+
+	return continueRound;
 }

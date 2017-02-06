@@ -1,20 +1,80 @@
 Turno 0: le carte sono state assegnate
-Turno 0: hR;Aý ha le seguenti carte: SEETHEFUTURE/DJANNI MIAGOLANTE/DJANNI MIAGOLANTE/SEETHEFUTURE/MEOOOW/
-Turno 0: Ø,:Aý ha le seguenti carte: DJANNI DORMIENTE/NOPE/NOPE/DJANNI SOCIAL/MEOOOW/
-Turno 0:  ha le seguenti carte: ATTACK/FAVOR/SKIP/SHUFFLE/MEOOOW/
-Turno 0:  ha le seguenti carte: DJANNI SOCIAL/NOPE/DJANNI GRASSO/SHUFFLE/MEOOOW/
-Turno 0:  ha giocato ATTACK
-Turno 0: Ø,:Aý ha annullato la carta
-Turno 0:  ha giocato FAVOR
-Turno 0: Ø,:Aý ha dato una carta DJANNI DORMIENTE a 
-Turno 0:  ha giocato SKIP
-Turno 1:  ha giocato SHUFFLE
-Turno 1:  ha pescato DJANNI DORMIENTE
-Turno 2: hR;Aý ha pescato DJANNI GRASSO
-Turno 0: Ø,:Aý ha pescato NOPE
-Turno 1:  ha pescato MEOOOW
-Turno 2:  ha pescato ATTACK
-Turno 3: hR;Aý ha pescato DJANNI AFFAMATO
-Turno 4: Ø,:Aý ha pescato SEETHEFUTURE
-Turno 5:  ha pescato NOPE
-Turno 6:  ha pescato MEOOOW
+Turno 0: Ema ha le seguenti carte: SKIP/SEETHEFUTURE/DJANNI MIAGOLANTE/DJANNI GRASSO/MEOOOW/
+Turno 0: Bot1 ha le seguenti carte: DJANNI SOCIAL/DJANNI AFFAMATO/DJANNI AFFAMATO/DJANNI SOCIAL/MEOOOW/
+Turno 0: Bot2 ha le seguenti carte: DJANNI GRASSO/ATTACK/FAVOR/DJANNI DORMIENTE/MEOOOW/
+Turno 0: Bot3 ha le seguenti carte: DJANNI AFFAMATO/FAVOR/SEETHEFUTURE/ATTACK/MEOOOW/
+Turno 0: Bot3 ha giocato FAVOR
+Turno 0: Bot2 ha dato una carta DJANNI GRASSO a Bot3
+Turno 0: Bot3 ha pescato NOPE
+Turno 1: Ema ha giocato SEETHEFUTURE
+Turno 1: Ema ha pescato DJANNI AFFAMATO
+Turno 2: Bot1 ha pescato DJANNI MIAGOLANTE
+Turno 3: Bot2 ha giocato FAVOR
+Turno 3: Bot3 ha annullato la carta
+Turno 3: Bot2 ha pescato DJANNI SOCIAL
+Turno 4: Bot3 ha pescato NOPE
+Turno 5: Ema ha pescato SHUFFLE
+Turno 6: Bot1 ha pescato DJANNI GRASSO
+Turno 7: Bot2 ha pescato EXPLODINGDJANNI
+Turno 7: Bot2 si e' salvato con una meow
+Turno 8: Bot3 ha pescato ATTACK
+Turno 9: Ema ha pescato SEETHEFUTURE
+Turno 10: Bot1 ha pescato FAVOR
+Turno 11: Bot2 ha pescato SHUFFLE
+Turno 12: Bot3 ha pescato DJANNI GRASSO
+Turno 13: Ema ha giocato SEETHEFUTURE
+Turno 13: Ema ha giocato SKIP
+Turno 14: Bot1 ha giocato FAVOR
+Turno 14: Bot1 ha dato una carta DJANNI SOCIAL a Bot1
+Turno 14: Bot1 ha pescato EXPLODINGDJANNI
+Turno 14: Bot1 si e' salvato con una meow
+Turno 15: Bot2 ha pescato DJANNI DORMIENTE
+Turno 16: Bot3 ha pescato NOPE
+Turno 17: Ema ha pescato EXPLODINGDJANNI
+Turno 17: Ema si e' salvato con una meow
+Turno 18: Bot1 ha pescato DJANNI MIAGOLANTE
+Turno 19: Bot2 ha pescato SHUFFLE
+Turno 20: Bot3 ha pescato SKIP
+Turno 21: Ema ha pescato DJANNI MIAGOLANTE
+Turno 22: Bot1 ha pescato MEOOOW
+Turno 23: Bot2 ha pescato FAVOR
+Turno 24: Bot3 ha pescato NOPE
+Turno 25: Ema ha pescato SKIP
+Turno 26: Bot1 ha pescato SKIP
+Turno 27: Bot2 ha giocato FAVOR
+Turno 27: Bot3 ha annullato la carta
+Turno 27: Bot2 ha pescato NOPE
+Turno 28: Bot3 ha pescato SEETHEFUTURE
+Turno 29: Ema ha pescato MEOOOW
+Turno 30: Bot1 ha pescato DJANNI DORMIENTE
+Turno 31: Bot2 ha pescato EXPLODINGDJANNI
+Turno 31: Bot2 e' esploso
+Turno 32: Bot3 ha pescato MEOOOW
+Turno 33: Ema ha pescato DJANNI SOCIAL
+Turno 34: Bot1 ha pescato DJANNI DORMIENTE
+Turno 35: Bot3 ha pescato MEOOOW
+Turno 36: Ema ha giocato DJANNI MIAGOLANTE
+Turno 36: Ema ha giocato DJANNI MIAGOLANTE
+Turno 36: Ema ha rubato la carta DJANNI DORMIENTE a Bot1
+Turno 36: Ema ha pescato SEETHEFUTURE
+Turno 37: Bot1 ha pescato SHUFFLE
+Turno 38: Bot3 ha giocato ATTACK
+Turno 39: Ema ha giocato SEETHEFUTURE
+Turno 39: Ema ha pescato ATTACK
+Turno 40: Ema ha giocato SKIP
+Turno 41: Bot1 ha giocato SKIP
+Turno 42: Bot3 ha giocato ATTACK
+Turno 43: Ema ha giocato ATTACK
+Turno 44: Bot1 ha pescato EXPLODINGDJANNI
+Turno 44: Bot1 si e' salvato con una meow
+Turno 45: Bot1 ha pescato EXPLODINGDJANNI
+Turno 45: Bot1 e' esploso
+Turno 46: Bot3 ha giocato SKIP
+Turno 47: Ema ha giocato SHUFFLE
+Turno 47: Ema ha pescato EXPLODINGDJANNI
+Turno 47: Ema si e' salvato con una meow
+Turno 48: Bot3 ha pescato EXPLODINGDJANNI
+Turno 48: Bot3 si e' salvato con una meow
+Turno 49: Ema ha pescato EXPLODINGDJANNI
+Turno 49: Ema e' esploso
+Turno 50: Bot3 ha vinto
