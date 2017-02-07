@@ -4,7 +4,7 @@
 #include "commons.h"
 typedef enum {EXPLODINGDJANNI, MEOOOW, SHUFFLE, NOPE, SEETHEFUTURE, ATTACK, SKIP, FAVOR, DJANNICARD} CardType;
 typedef enum {HUMAN, NPC} PlayerType;
-typedef enum {CHOOSE, DRAW, NOP, DEATH, FAV, DJSTOLE, MEOW} Log;
+typedef enum {CHOOSE, DRAW, NOP, DEATH, FAV, DJSTOLE, MEOW, START} Log;
 
 typedef struct{
 	CardType cardType;

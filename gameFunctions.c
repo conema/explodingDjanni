@@ -51,7 +51,7 @@ void printDeck(Card *cards, const int size){
 }
 
 /* Distribuisce le carte */
-Deck* giveCards(Player* players, Deck *deckCards, Card * meowCards, int *nMeow){
+Deck* giveCards(Player *players, Deck *deckCards, Card * meowCards, int *nMeow){
 	int i, j;
 	Deck *temp = deckCards;
 
@@ -85,6 +85,16 @@ void printCard(Card card){
 void printType(Card card){
 	char type[][16] = {"EXPLODINGDJANNI", "MEOOOW", "SHUFFLE", "NOPE", "SEETHEFUTURE", "ATTACK", "SKIP", "FAVOR", "DJANNICARD"};
 	printf("%s", type[card.cardType]);
+}
+
+/* Liberazione memoria mazzi giocatori */
+void freeCards(Player players[NPLAYERS]){
+	int i;
+	for(i = 0; i < NPLAYERS; i++){
+		if(players[i].alive){
+			free(players[i].cards);
+		}
+	}
 }
 
 /* Restituisce la posizione di una carta, -1 altrimenti */
@@ -121,7 +131,7 @@ void printAlive(const Player players[NPLAYERS], const int currentPlayer){
 }
 
 /* Elimina la carta del giocatore */
-Card removeCardPlayer(Player* player, const int pos){
+Card removeCardPlayer(Player *player, const int pos){
 	Card tempCard, deletedCard;
 	int nCards = --player->nCards;
 
@@ -139,7 +149,7 @@ Card removeCardPlayer(Player* player, const int pos){
 }
 
 /* Aggiungere carta al mazzo del giocatore */
-void addCardPlayer(Player* player, Card card){
+void addCardPlayer(Player *player, Card card){
 	int nCards = ++player->nCards;
 
 	//Re-allocazione della memoria
@@ -156,7 +166,7 @@ void chooseCard(Deck *deckCards, Player players[NPLAYERS], const int currentPlay
 }
 
 /* Pesca una carta */
-Deck* drawCard(Player* player, Deck* deckCards, const int nRound){
+Deck* drawCard(Player *player, Deck* deckCards, const int nRound){
 	if(deckCards == NULL){
 		printf("Il mazzo è vuoto\n");
 	}else{
@@ -173,7 +183,7 @@ Deck* drawCard(Player* player, Deck* deckCards, const int nRound){
 	return deckCards;
 }
 
-Deck* isExplosive(Player* player, Deck* deckCards, const int nRound){
+Deck* isExplosive(Player *player, Deck* deckCards, const int nRound){
 	_Bool meow = false;
 	int i, meowPos, nRand;
 	char sc;
@@ -186,16 +196,16 @@ Deck* isExplosive(Player* player, Deck* deckCards, const int nRound){
 	}
 
 	if(player->playerType != NPC){
-    printf(
-     "      /\\_/\\\n"
-     " /\\  / o o \\\n"
-     "//\\\\ \\~(*)~/\n"
-     " , \\/   ^ /\n"
-     "   | \\|| || \n"
-     "   \\ '()=()            ________\n"
-     "    \\)__H_,,__        (__((___()\n"    
-     "      |ACME |\\\\______(__((___()()\n"								                     
-     "      |_____| '-----(__((___()()()\n");
+    	printf(
+    	 "      /\\_/\\\n"
+    	 " /\\  / o o \\\n"
+    	 "//\\\\ \\~(*)~/\n"
+    	 " , \\/   ^ /\n"
+    	 "   | \\|| || \n"
+    	 "   \\ '()=()            ________\n"
+    	 "    \\)__H_,,__        (__((___()\n"    
+    	 "      |ACME |\\\\______(__((___()()\n"								                     
+    	 "      |_____| '-----(__((___()()()\n");
 	}
 
 	if(meow == true){
@@ -281,6 +291,11 @@ void cardEffect(Deck *deckCards, Player players[NPLAYERS], const Card card, cons
 					do{
 						scPlayer = rand()%NPLAYERS;
 					}while(!players[scPlayer].alive);
+				}
+
+				if(players[scPlayer].nCards <= 0){
+					printf("Il giocatore è rimasto senza carte.\n");
+					return;
 				}
 
 				if(players[scPlayer].playerType != NPC){
@@ -386,7 +401,8 @@ _Bool callNope(Player players[NPLAYERS], const int currentPlayer, const Card car
 					cardTemp = players[i].cards[nopePos];
 					newLogPlayer(players[i], players[i], cardTemp, nRound, NOP);
 					removeCardPlayer(&players[i], nopePos);
-					//Viene chiesto agli altri player se vogliono annullare la nome
+
+					//Viene chiesto agli altri player se vogliono annullare la nope
 					if(callNope(players, i, cardTemp, nRound)){
 						return false;
 					}else{

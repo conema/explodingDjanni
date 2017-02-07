@@ -40,7 +40,7 @@ int main(int argc, char *argv[]){
   switch(sc){
         case 1:
                newGame(players);
-               deckCards = loadMode(players, deckCards, nRound, sc);
+               deckCards = loadMode(players, deckCards, sc);
                currentPlayer = (rand() % NPLAYERS);
                break;
         case 2:
@@ -51,7 +51,10 @@ int main(int argc, char *argv[]){
                break;
     }
 
-    startGame(players, deckCards, nRound, currentPlayer, attackNext);
-
+    deckCards = startGame(players, deckCards, nRound, currentPlayer, attackNext);
+    
+    //Liberazione memoria carte
+    freeList(deckCards);
+    freeCards(players);
   return 0;
 }

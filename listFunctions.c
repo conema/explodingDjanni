@@ -79,3 +79,13 @@ Deck* deleteHead(Deck *first){
   }
   return first;
 }
+
+/* Cancellazione memoria occupata dalla lista */
+void freeList(Deck *first){
+  if(first == NULL){
+    return;
+  }
+  Deck *next = first->next;
+  free(first);
+  freeList(next);
+}

@@ -14,6 +14,10 @@
 		"functional": "cpp",
 		"*h*h*h*h*h*h*h*h*h*hsystem_error": "cpp",
 		"system_error": "cpp",
-		"cmath": "cpp"
+		"cmath": "cpp",
+		"*h*h*h*h*h*h*hfunctional": "cpp",
+		"*hchrono": "cpp",
+		"chrono": "cpp",
+		"ratio": "cpp"
 	}
 }

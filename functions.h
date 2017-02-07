@@ -16,7 +16,7 @@ int menu();
 void newGame(Player players[NPLAYERS]);
 Deck* loadGame(Player players[NPLAYERS], Deck* deckCards, _Bool *attackNext, int *currentPlayer);
 void saveGame(Player players[NPLAYERS], Deck *deckCards, int currentPlayer, _Bool attackNext);
-Deck* loadMode(Player palyers[NPLAYERS], Deck* deckCards, const int nRound, const int mode);
-void startGame(Player players[NPLAYERS], Deck *deckCards, int nRound, int currentPlayer, _Bool attackNext);
+Deck* loadMode(Player palyers[NPLAYERS], Deck* deckCards, const int mode);
+Deck* startGame(Player players[NPLAYERS], Deck *deckCards, int nRound, int currentPlayer, _Bool attackNext);
 
 #endif // FUNCTIONS_H_

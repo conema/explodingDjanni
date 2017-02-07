@@ -10,5 +10,6 @@ Deck* moveCard(Deck *first, const int from, const int to);
 int listDimension(Deck *first);
 void printList(Deck *first);
 Deck* deleteHead(Deck *first);
+void freeList(Deck *first);
 
 #endif // LIST_FUNCTIONS_H_
