@@ -1,162 +1,262 @@
-Turno 0: Alessandro ha le seguenti carte: MEOOOW/MEOOOW/DJANNI DORMIENTE/
-Turno 0: Fabio ha le seguenti carte: 
-Turno 0: Giammi ha le seguenti carte: SEETHEFUTURE/SEETHEFUTURE/MEOOOW/DJANNI GRASSO/DJANNI MIAGOLANTE/MEOOOW/
-Turno 0: Riccardo ha le seguenti carte: MEOOOW/NOPE/MEOOOW/DJANNI AFFAMATO/DJANNI DORMIENTE/DJANNI GRASSO/
-Turno 0: Giammi ha giocato EXPLODINGDJANNI
-Turno 0: Alessandro ha le seguenti carte: MEOOOW/MEOOOW/DJANNI DORMIENTE/
-Turno 0: Fabio ha le seguenti carte: 
-Turno 0: Giammi ha le seguenti carte: SEETHEFUTURE/SEETHEFUTURE/MEOOOW/DJANNI GRASSO/DJANNI MIAGOLANTE/MEOOOW/
-Turno 0: Riccardo ha le seguenti carte: MEOOOW/NOPE/MEOOOW/DJANNI AFFAMATO/DJANNI DORMIENTE/DJANNI GRASSO/
-Turno 0: Giammi ha giocato DJANNI GRASSO
-Turno 0: r ha le seguenti carte: FAVOR/SKIP/DJANNI AFFAMATO/SHUFFLE/MEOOOW/
-Turno 0: r ha le seguenti carte: DJANNI GRASSO/FAVOR/DJANNI MIAGOLANTE/FAVOR/MEOOOW/
-Turno 0: r ha le seguenti carte: DJANNI AFFAMATO/SEETHEFUTURE/SKIP/DJANNI AFFAMATO/MEOOOW/
-Turno 0: r ha le seguenti carte: DJANNI DORMIENTE/DJANNI GRASSO/NOPE/DJANNI SOCIAL/MEOOOW/
-Turno 0: r ha pescato ATTACK
-Turno 1: r ha pescato MEOOOW
-Turno 2: r ha giocato FAVOR
-Turno 2: r ha dato una carta DJANNI AFFAMATO a r
-Turno 2: r ha pescato NOPE
-Turno 3: r ha giocato FAVOR
-Turno 3: r ha dato una carta MEOOOW a r
-Turno 3: r ha giocato FAVOR
-Turno 3: r ha dato una carta DJANNI GRASSO a r
-Turno 3: r ha pescato SHUFFLE
-Turno 4: r ha pescato MEOOOW
-Turno 5: r ha pescato DJANNI MIAGOLANTE
-Turno 6: r ha pescato NOPE
-Turno 7: r ha pescato DJANNI DORMIENTE
-Turno 8: r ha pescato DJANNI SOCIAL
-Turno 9: r ha pescato SEETHEFUTURE
-Turno 10: r ha pescato SKIP
-Turno 11: r ha pescato DJANNI GRASSO
-Turno 12: r ha pescato DJANNI DORMIENTE
-Turno 13: r ha pescato DJANNI AFFAMATO
-Turno 14: r ha pescato NOPE
-Turno 15: r ha pescato DJANNI MIAGOLANTE
-Turno 16: r ha pescato ATTACK
-Turno 17: r ha pescato SKIP
-Turno 18: r ha pescato MEOOOW
-Turno 19: r ha pescato ATTACK
-Turno 20: r ha pescato EXPLODINGDJANNI
-Turno 20: r si e' salvato con una meow
-Turno 21: r ha pescato FAVOR
-Turno 22: r ha pescato DJANNI DORMIENTE
-Turno 23: r ha pescato EXPLODINGDJANNI
-Turno 23: r si e' salvato con una meow
-Turno 24: r ha pescato DJANNI SOCIAL
-Turno 25: r ha giocato FAVOR
-Turno 25: r ha dato una carta ATTACK a r
-Turno 25: r ha pescato MEOOOW
-Turno 26: r ha pescato EXPLODINGDJANNI
-Turno 26: r si e' salvato con una meow
-Turno 27: r ha pescato EXPLODINGDJANNI
-Turno 27: r si e' salvato con una meow
-Turno 28: r ha pescato DJANNI MIAGOLANTE
-Turno 29: r ha pescato EXPLODINGDJANNI
-Turno 29: r si e' salvato con una meow
-Turno 30: r ha pescato DJANNI SOCIAL
-Turno 31: r ha pescato DJANNI GRASSO
-Turno 32: r ha pescato EXPLODINGDJANNI
-Turno 32: r si e' salvato con una meow
-Turno 33: r ha pescato EXPLODINGDJANNI
-Turno 33: r si e' salvato con una meow
-Turno 34: r ha pescato SHUFFLE
-Turno 35: r ha pescato SEETHEFUTURE
-Turno 36: r ha pescato SHUFFLE
-Turno 37: r ha pescato ATTACK
-Turno 38: r ha pescato NOPE
-Turno 39: r ha pescato SEETHEFUTURE
-Turno 40: r ha giocato ATTACK
-Turno 40: r ha annullato la carta
-Turno 40: r ha pescato SEETHEFUTURE
-Turno 41: r ha giocato ATTACK
-Turno 42: r ha giocato SKIP
-Turno 43: r ha giocato SKIP
-Turno 44: r ha pescato EXPLODINGDJANNI
-Turno 44: r e' esploso
-Turno 45: r ha giocato ATTACK
-Turno 46: r ha giocato ATTACK
-Turno 47: r ha pescato EXPLODINGDJANNI
-Turno 47: r e' esploso
-Turno 48: r ha giocato SKIP
-Turno 49: r ha giocato SKIP
-Turno 50: r ha pescato EXPLODINGDJANNI
-Turno 50: r e' esploso
-Turno 51: r ha vinto
-Turno 0: e ha le seguenti carte: DJANNI DORMIENTE/SEETHEFUTURE/FAVOR/DJANNI AFFAMATO/MEOOOW/
-Turno 0: e ha le seguenti carte: FAVOR/DJANNI SOCIAL/DJANNI GRASSO/SHUFFLE/MEOOOW/
-Turno 0: e ha le seguenti carte: SKIP/SEETHEFUTURE/DJANNI MIAGOLANTE/NOPE/MEOOOW/
-Turno 0: e ha le seguenti carte: NOPE/FAVOR/SHUFFLE/DJANNI DORMIENTE/MEOOOW/
-Turno 0: e ha giocato FAVOR
-Turno 0: e ha annullato la carta
-Turno 0: e ha annullato la carta
-Turno 0: e ha dato una carta FAVOR a e
-Turno 0: e ha giocato FAVOR
-Turno 0: e ha dato una carta DJANNI SOCIAL a e
-Turno 0: e ha pescato ATTACK
-Turno 1: e ha pescato SHUFFLE
-Turno 2: e ha pescato FAVOR
-Turno 3: e ha giocato FAVOR
-Turno 3: e ha dato una carta DJANNI DORMIENTE a e
-Turno 3: e ha pescato SKIP
-Turno 4: e ha pescato DJANNI MIAGOLANTE
-Turno 5: e ha pescato SEETHEFUTURE
-Turno 6: e ha giocato FAVOR
-Turno 6: e ha dato una carta SHUFFLE a e
-Turno 6: e ha pescato NOPE
-Turno 7: e ha pescato DJANNI GRASSO
-Turno 8: e ha pescato DJANNI SOCIAL
-Turno 9: e ha pescato EXPLODINGDJANNI
-Turno 9: e si e' salvato con una meow
-Turno 10: e ha pescato MEOOOW
-Turno 11: e ha pescato DJANNI AFFAMATO
-Turno 12: e ha pescato SEETHEFUTURE
-Turno 13: e ha pescato DJANNI GRASSO
-Turno 14: e ha pescato EXPLODINGDJANNI
-Turno 14: e si e' salvato con una meow
-Turno 15: e ha pescato NOPE
-Turno 16: e ha pescato DJANNI MIAGOLANTE
-Turno 17: e ha pescato EXPLODINGDJANNI
-Turno 17: e e' esploso
-Turno 18: e ha pescato NOPE
-Turno 19: e ha pescato DJANNI DORMIENTE
-Turno 20: e ha pescato DJANNI SOCIAL
-Turno 21: e ha pescato SEETHEFUTURE
-Turno 22: e ha pescato DJANNI DORMIENTE
-Turno 23: e ha pescato MEOOOW
-Turno 24: e ha pescato MEOOOW
-Turno 25: e ha pescato SKIP
-Turno 26: e ha pescato DJANNI AFFAMATO
-Turno 27: e ha pescato ATTACK
-Turno 28: e ha pescato DJANNI SOCIAL
-Turno 29: e ha pescato SHUFFLE
-Turno 30: e ha pescato DJANNI GRASSO
-Turno 31: e ha pescato DJANNI AFFAMATO
-Turno 32: e ha pescato EXPLODINGDJANNI
-Turno 32: e si e' salvato con una meow
-Turno 33: e ha pescato ATTACK
-Turno 34: e ha pescato MEOOOW
-Turno 35: e ha pescato DJANNI MIAGOLANTE
-Turno 36: e ha pescato EXPLODINGDJANNI
-Turno 36: e si e' salvato con una meow
-Turno 37: e ha pescato EXPLODINGDJANNI
-Turno 37: e si e' salvato con una meow
-Turno 38: e ha pescato SKIP
-Turno 39: e ha giocato ATTACK
-Turno 40: e ha giocato SKIP
-Turno 41: e ha giocato SKIP
-Turno 42: e ha giocato ATTACK
-Turno 43: e ha giocato ATTACK
-Turno 44: e ha pescato EXPLODINGDJANNI
-Turno 44: e si e' salvato con una meow
-Turno 45: e ha pescato EXPLODINGDJANNI
-Turno 45: e e' esploso
-Turno 46: e ha giocato SKIP
-Turno 47: e ha pescato ATTACK
-Turno 48: e ha pescato EXPLODINGDJANNI
-Turno 48: e si e' salvato con una meow
-Turno 49: e ha giocato ATTACK
-Turno 50: e ha pescato EXPLODINGDJANNI
-Turno 50: e e' esploso
-Turno 51: e ha vinto
+Turno 0: Abete ha le seguenti carte: ATTACK/SEETHEFUTURE/FAVOR/SHUFFLE/MEOOOW/
+Turno 0: Albero ha le seguenti carte: SEETHEFUTURE/DJANNI AFFAMATO/FAVOR/SKIP/MEOOOW/
+Turno 0: Pigna ha le seguenti carte: FAVOR/DJANNI MIAGOLANTE/NOPE/ATTACK/MEOOOW/
+Turno 0: Bot1 ha le seguenti carte: DJANNI SOCIAL/NOPE/SHUFFLE/SKIP/MEOOOW/
+Turno 0: Albero ha giocato FAVOR
+Turno 0: Bot1 ha dato una carta NOPE a Albero
+Turno 0: Albero ha giocato SKIP
+Turno 1: Pigna ha giocato ATTACK
+Turno 2: Bot1 ha giocato SKIP
+Turno 2: Albero ha annullato la carta
+Turno 2: Bot1 ha pescato DJANNI GRASSO
+Turno 3: Bot1 ha pescato DJANNI SOCIAL
+Turno 4: Abete ha giocato ATTACK
+Turno 5: Albero ha pescato DJANNI SOCIAL
+Turno 6: Albero ha pescato FAVOR
+Turno 7: Pigna ha giocato FAVOR
+Turno 7: Albero ha dato una carta DJANNI SOCIAL a Pigna
+Turno 7: Pigna ha pescato ATTACK
+Turno 8: Bot1 ha giocato DJANNI SOCIAL
+Turno 8: Bot1 ha giocato DJANNI SOCIAL
+Turno 8: Bot1 ha rubato la carta FAVOR a Albero
+Turno 8: Bot1 ha giocato FAVOR
+Turno 8: Abete ha dato una carta MEOOOW a Bot1
+Turno 8: Bot1 ha pescato NOPE
+Turno 9: Abete ha giocato FAVOR
+Turno 9: Bot1 ha dato una carta MEOOOW a Abete
+Turno 9: Abete ha pescato DJANNI DORMIENTE
+Turno 10: Albero ha pescato DJANNI AFFAMATO
+Turno 11: Pigna ha giocato ATTACK
+Turno 11: Bot1 ha annullato la carta
+Turno 11: Pigna ha pescato DJANNI AFFAMATO
+Turno 12: Bot1 ha pescato SHUFFLE
+Turno 13: Abete ha pescato DJANNI GRASSO
+Turno 14: Albero ha pescato DJANNI SOCIAL
+Turno 15: Pigna ha pescato SKIP
+Turno 16: Bot1 ha pescato MEOOOW
+Turno 17: Abete ha pescato DJANNI DORMIENTE
+Turno 18: Albero ha pescato DJANNI DORMIENTE
+Turno 19: Pigna ha giocato SKIP
+Turno 20: Bot1 ha pescato SEETHEFUTURE
+Turno 21: Abete ha giocato SEETHEFUTURE
+Turno 21: Abete ha pescato NOPE
+Turno 22: Albero ha pescato EXPLODINGDJANNI
+Turno 22: Albero si e' salvato con una meow
+Turno 23: Pigna ha pescato EXPLODINGDJANNI
+Turno 23: Pigna si e' salvato con una meow
+Turno 24: Bot1 ha pescato MEOOOW
+Turno 25: Abete ha pescato DJANNI GRASSO
+Turno 26: Albero ha pescato DJANNI MIAGOLANTE
+Turno 27: Pigna ha pescato DJANNI GRASSO
+Turno 28: Bot1 ha pescato MEOOOW
+Turno 29: Abete ha pescato DJANNI DORMIENTE
+Turno 30: Albero ha pescato EXPLODINGDJANNI
+Turno 30: Albero e' esploso
+Turno 31: Pigna ha pescato MEOOOW
+Turno 32: Bot1 ha pescato EXPLODINGDJANNI
+Turno 32: Bot1 si e' salvato con una meow
+Turno 33: Abete ha pescato SEETHEFUTURE
+Turno 34: Pigna ha pescato NOPE
+Turno 35: Bot1 ha pescato SHUFFLE
+Turno 36: Abete ha pescato SEETHEFUTURE
+Turno 37: Pigna ha pescato DJANNI MIAGOLANTE
+Turno 38: Bot1 ha pescato ATTACK
+Turno 39: Abete ha pescato DJANNI MIAGOLANTE
+Turno 40: Pigna ha pescato EXPLODINGDJANNI
+Turno 40: Pigna si e' salvato con una meow
+Turno 41: Bot1 ha pescato SKIP
+Turno 42: Abete ha pescato EXPLODINGDJANNI
+Turno 42: Abete si e' salvato con una meow
+Turno 43: Pigna ha pescato DJANNI AFFAMATO
+Turno 44: Bot1 ha giocato ATTACK
+Turno 45: Abete ha giocato DJANNI DORMIENTE
+Turno 45: Abete ha giocato DJANNI DORMIENTE
+Turno 45: Abete ha giocato DJANNI DORMIENTE
+Turno 45: Abete ha rubato la carta MEOOOW a Bot1
+Turno 45: Abete ha pescato EXPLODINGDJANNI
+Turno 45: Abete si e' salvato con una meow
+Turno 46: Abete ha giocato DJANNI GRASSO
+Turno 46: Abete ha giocato DJANNI GRASSO
+Turno 46: Abete ha rubato la carta MEOOOW a Bot1
+Turno 46: Abete ha pescato EXPLODINGDJANNI
+Turno 46: Abete si e' salvato con una meow
+Turno 47: Pigna ha pescato EXPLODINGDJANNI
+Turno 47: Pigna e' esploso
+Turno 48: Bot1 ha giocato SKIP
+Turno 48: Abete ha annullato la carta
+Turno 48: Bot1 ha pescato EXPLODINGDJANNI
+Turno 48: Bot1 si e' salvato con una meow
+Turno 49: Abete ha pescato EXPLODINGDJANNI
+Turno 49: Abete e' esploso
+Turno 50: Bot1 ha vinto
+Turno 0: Pinco1 ha le seguenti carte: SEETHEFUTURE/SHUFFLE/DJANNI MIAGOLANTE/DJANNI AFFAMATO/MEOOOW/
+Turno 0: Pinco2 ha le seguenti carte: DJANNI MIAGOLANTE/DJANNI SOCIAL/SKIP/SEETHEFUTURE/MEOOOW/
+Turno 0: Pinco3 ha le seguenti carte: FAVOR/SKIP/DJANNI DORMIENTE/NOPE/MEOOOW/
+Turno 0: Pinco4 ha le seguenti carte: ATTACK/SKIP/DJANNI DORMIENTE/DJANNI GRASSO/MEOOOW/
+Turno 0: Pinco4 ha pescato SHUFFLE
+Turno 1: Pinco1 ha pescato DJANNI MIAGOLANTE
+Turno 2: Pinco2 ha pescato FAVOR
+Turno 3: Pinco3 ha pescato DJANNI GRASSO
+Turno 4: Pinco4 ha pescato FAVOR
+Turno 5: Pinco1 ha pescato DJANNI SOCIAL
+Turno 6: Pinco2 ha pescato EXPLODINGDJANNI
+Turno 6: Pinco2 si e' salvato con una meow
+Turno 7: Pinco3 ha pescato MEOOOW
+Turno 8: Pinco4 ha pescato ATTACK
+Turno 9: Pinco1 ha pescato DJANNI AFFAMATO
+Turno 10: Pinco2 ha pescato SEETHEFUTURE
+Turno 11: Pinco3 ha pescato EXPLODINGDJANNI
+Turno 11: Pinco3 si e' salvato con una meow
+Turno 12: Pinco4 ha pescato SHUFFLE
+Turno 13: Pinco1 ha pescato MEOOOW
+Turno 14: Pinco2 ha pescato SEETHEFUTURE
+Turno 15: Pinco3 ha pescato DJANNI AFFAMATO
+Turno 16: Pinco4 ha pescato ATTACK
+Turno 17: Pinco1 ha pescato MEOOOW
+Turno 18: Pinco2 ha pescato EXPLODINGDJANNI
+Turno 18: Pinco2 e' esploso
+Turno 19: Pinco3 ha pescato DJANNI GRASSO
+Turno 20: Pinco4 ha pescato NOPE
+Turno 21: Pinco1 ha giocato SEETHEFUTURE
+Turno 21: Pinco1 ha pescato DJANNI MIAGOLANTE
+Turno 22: Pinco3 ha pescato DJANNI AFFAMATO
+Turno 23: Pinco4 ha pescato NOPE
+Turno 24: Pinco1 ha pescato FAVOR
+Turno 25: Pinco3 ha pescato SHUFFLE
+Turno 26: Pinco4 ha pescato NOPE
+Turno 27: Pinco1 ha pescato EXPLODINGDJANNI
+Turno 27: Pinco1 si e' salvato con una meow
+Turno 28: Pinco3 ha pescato NOPE
+Turno 29: Pinco4 ha pescato DJANNI DORMIENTE
+Turno 30: Pinco1 ha pescato EXPLODINGDJANNI
+Turno 30: Pinco1 si e' salvato con una meow
+Turno 31: Pinco3 ha pescato DJANNI SOCIAL
+Turno 32: Pinco4 ha pescato SKIP
+Turno 33: Pinco1 ha pescato SEETHEFUTURE
+Turno 34: Pinco3 ha pescato EXPLODINGDJANNI
+Turno 34: Pinco3 si e' salvato con una meow
+Turno 35: Pinco4 ha pescato DJANNI DORMIENTE
+Turno 36: Pinco1 ha giocato SEETHEFUTURE
+Turno 36: Pinco1 ha pescato EXPLODINGDJANNI
+Turno 36: Pinco1 si e' salvato con una meow
+Turno 37: Pinco3 ha pescato DJANNI GRASSO
+Turno 38: Pinco4 ha pescato ATTACK
+Turno 39: Pinco1 ha pescato DJANNI SOCIAL
+Turno 40: Pinco3 ha pescato MEOOOW
+Turno 41: Pinco4 ha pescato EXPLODINGDJANNI
+Turno 41: Pinco4 si e' salvato con una meow
+Turno 42: Pinco1 ha pescato EXPLODINGDJANNI
+Turno 42: Pinco1 e' esploso
+Turno 43: Pinco3 ha pescato EXPLODINGDJANNI
+Turno 43: Pinco3 si e' salvato con una meow
+Turno 44: Pinco4 ha giocato SHUFFLE
+Turno 44: Pinco4 ha pescato EXPLODINGDJANNI
+Turno 44: Pinco4 e' esploso
+Turno 45: Pinco3 ha vinto
+Turno 0: Alessandro ha le seguenti carte: MEOOOW/MEOOOW/DJANNI GRASSO/SEETHEFUTURE/
+Turno 0: Fabio ha le seguenti carte: FAVOR/MEOOOW/SEETHEFUTURE/FAVOR/DJANNI AFFAMATO/
+Turno 0: Giammi ha le seguenti carte: ATTACK/FAVOR/DJANNI DORMIENTE/MEOOOW/NOPE/
+Turno 0: Riccardo ha le seguenti carte: SEETHEFUTURE/MEOOOW/DJANNI DORMIENTE/NOPE/SHUFFLE/
+Turno 0: Fabio ha pescato NOPE
+Turno 1: Fabio ha pescato DJANNI GRASSO
+Turno 2: Giammi ha pescato SKIP
+Turno 3: Riccardo ha pescato DJANNI MIAGOLANTE
+Turno 4: Alessandro ha pescato EXPLODINGDJANNI
+Turno 4: Alessandro si e' salvato con una meow
+Turno 5: Fabio ha giocato FAVOR
+Turno 5: Giammi ha annullato la carta
+Turno 5: Fabio ha annullato la carta
+Turno 5: Giammi ha dato una carta DJANNI DORMIENTE a Fabio
+Turno 5: Fabio ha pescato DJANNI MIAGOLANTE
+Turno 6: Giammi ha giocato ATTACK
+Turno 6: Riccardo ha annullato la carta
+Turno 6: Giammi ha giocato FAVOR
+Turno 6: Riccardo ha dato una carta DJANNI DORMIENTE a Giammi
+Turno 6: Giammi ha giocato SKIP
+Turno 7: Riccardo ha giocato SEETHEFUTURE
+Turno 7: Riccardo ha pescato DJANNI SOCIAL
+Turno 8: Alessandro ha pescato SEETHEFUTURE
+Turno 9: Fabio ha pescato DJANNI DORMIENTE
+Turno 10: Giammi ha pescato SKIP
+Turno 11: Riccardo ha pescato EXPLODINGDJANNI
+Turno 11: Riccardo si e' salvato con una meow
+Turno 12: Alessandro ha pescato DJANNI AFFAMATO
+Turno 13: Fabio ha giocato DJANNI DORMIENTE
+Turno 13: Fabio ha giocato DJANNI DORMIENTE
+Turno 13: Fabio ha rubato la carta DJANNI MIAGOLANTE a Riccardo
+Turno 13: Fabio ha giocato DJANNI MIAGOLANTE
+Turno 13: Fabio ha giocato DJANNI MIAGOLANTE
+Turno 13: Fabio ha rubato la carta DJANNI SOCIAL a Riccardo
+Turno 13: Fabio ha pescato SEETHEFUTURE
+Turno 14: Giammi ha giocato SKIP
+Turno 15: Riccardo ha giocato SHUFFLE
+Turno 15: Riccardo ha pescato FAVOR
+Turno 16: Alessandro ha pescato MEOOOW
+Turno 17: Fabio ha pescato DJANNI SOCIAL
+Turno 18: Giammi ha pescato EXPLODINGDJANNI
+Turno 18: Giammi si e' salvato con una meow
+Turno 19: Riccardo ha giocato FAVOR
+Turno 19: Fabio ha dato una carta DJANNI SOCIAL a Riccardo
+Turno 19: Riccardo ha pescato DJANNI GRASSO
+Turno 20: Alessandro ha pescato EXPLODINGDJANNI
+Turno 20: Alessandro si e' salvato con una meow
+Turno 21: Fabio ha pescato DJANNI MIAGOLANTE
+Turno 22: Giammi ha pescato DJANNI GRASSO
+Turno 23: Riccardo ha pescato ATTACK
+Turno 24: Alessandro ha pescato SHUFFLE
+Turno 25: Fabio ha pescato DJANNI AFFAMATO
+Turno 26: Giammi ha pescato NOPE
+Turno 27: Riccardo ha giocato ATTACK
+Turno 27: Giammi ha annullato la carta
+Turno 27: Riccardo ha pescato MEOOOW
+Turno 28: Alessandro ha pescato ATTACK
+Turno 29: Fabio ha giocato DJANNI AFFAMATO
+Turno 29: Fabio ha giocato DJANNI AFFAMATO
+Turno 29: Fabio ha rubato la carta MEOOOW a Riccardo
+Turno 29: Fabio ha pescato SKIP
+Turno 30: Giammi ha pescato DJANNI DORMIENTE
+Turno 31: Riccardo ha pescato MEOOOW
+Turno 32: Alessandro ha giocato ATTACK
+Turno 33: Fabio ha giocato SKIP
+Turno 34: Fabio ha giocato FAVOR
+Turno 34: Alessandro ha dato una carta DJANNI AFFAMATO a Fabio
+Turno 34: Fabio ha pescato DJANNI MIAGOLANTE
+Turno 35: Giammi ha giocato DJANNI DORMIENTE
+Turno 35: Giammi ha giocato DJANNI DORMIENTE
+Turno 35: Giammi ha rubato la carta SEETHEFUTURE a Alessandro
+Turno 35: Giammi ha pescato DJANNI SOCIAL 
+Turno 36: Riccardo ha pescato SHUFFLE
+Turno 37: Alessandro ha giocato SEETHEFUTURE
+Turno 37: Alessandro ha pescato NOPE
+Turno 38: Fabio ha pescato EXPLODINGDJANNI
+Turno 38: Fabio si e' salvato con una meow
+Turno 39: Giammi ha pescato SKIP
+Turno 40: Riccardo ha pescato EXPLODINGDJANNI
+Turno 40: Riccardo si e' salvato con una meow
+Turno 41: Alessandro ha giocato SHUFFLE
+Turno 41: Alessandro ha pescato SHUFFLE
+Turno 42: Fabio ha giocato SEETHEFUTURE
+Turno 42: Fabio ha pescato EXPLODINGDJANNI
+Turno 42: Fabio si e' salvato con una meow
+Turno 43: Giammi ha giocato SEETHEFUTURE
+Turno 43: Giammi ha giocato SKIP
+Turno 43: Alessandro ha annullato la carta
+Turno 43: Giammi ha pescato EXPLODINGDJANNI
+Turno 43: Giammi e' esploso
+Turno 44: Riccardo ha giocato SHUFFLE
+Turno 44: Riccardo ha pescato DJANNI SOCIAL
+Turno 45: Alessandro ha giocato SHUFFLE
+Turno 45: Alessandro ha pescato EXPLODINGDJANNI
+Turno 45: Alessandro si e' salvato con una meow
+Turno 46: Fabio ha giocato SEETHEFUTURE
+Turno 46: Fabio ha pescato EXPLODINGDJANNI
+Turno 46: Fabio e' esploso
+Turno 47: Riccardo ha giocato DJANNI SOCIAL
+Turno 47: Riccardo ha giocato DJANNI SOCIAL
+Turno 47: Riccardo ha rubato la carta DJANNI GRASSO a Alessandro
+Turno 47: Riccardo ha giocato DJANNI GRASSO
+Turno 47: Riccardo ha giocato DJANNI GRASSO
+Turno 47: Riccardo ha pescato DJANNI AFFAMATO
+Turno 48: Alessandro ha pescato EXPLODINGDJANNI
+Turno 48: Alessandro e' esploso
+Turno 49: Riccardo ha vinto

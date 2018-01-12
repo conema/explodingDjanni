@@ -1,4 +1,4 @@
-/*           
+/*
              _.-^^---....,,--
          _ --                 --_
         (<       Exploding      >)
@@ -16,8 +16,9 @@
 |  |  | ) ) |  |  |  |  |
 
 Simulatore del gioco di carte "Exploding Kittens"
-Note dall'autore:
-  Mi stavo annoiando, quindi mi sono permesso una leggera vena artistica, spero sia cosa grata :D
+
+PS: Per il corretto funzionamento del programma bisogna settare come "execution working dir" la directory nella quale risiedono i sorgenti del programma.
+Questa impostazione si trova nelle impostazioni del progetto (sotto build target) su codeblocks e serve per la corretta lettura dei file di gioco.
 */
 
 #include "commons.h"
@@ -46,13 +47,10 @@ int main(int argc, char *argv[]){
         case 2:
                deckCards = loadGame(players, deckCards, &attackNext, &currentPlayer);
                break;
-        case 3:
-               //credits();
-               break;
     }
 
     deckCards = startGame(players, deckCards, nRound, currentPlayer, attackNext);
-    
+
     //Liberazione memoria carte
     freeList(deckCards);
     freeCards(players);

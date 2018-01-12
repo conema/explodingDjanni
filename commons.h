@@ -18,6 +18,8 @@
 #define NAMELEN 24
 
 //Quantità scelte
+#define FIRSTCHOICEMENU 1
+#define LASTCHOICEMENU 2
 #define FIRSTCHOICE 1
 #define LASTCHOICE 3
 
@@ -30,7 +32,7 @@
 //Nome log
 #define LOGNAME "log.txt"
 
-//Colori scritte console
+//Colori scritte console per essere un po' tamarri
 //http://www.linuxjournal.com/article/8603
 #define COLOR_RED     "\x1b[31m"
 #define COLOR_RED_BLINK "\033[5;31;3m"
